@@ -1,0 +1,66 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{tikz-cd}
+\usepackage{geometry}
+\usepackage{mathrsfs}
+\usepackage{bclogo}
+\usepackage{mathtools}
+\usepackage{setspace}
+\usepackage{comment}
+\usepackage{fancyhdr}
+\usepackage{calc}
+\usepackage[shortlabels]{enumitem}
+\usepackage[pdfpagelabels]{hyperref}    
+\usepackage[backend=biber,bibencoding=utf8,style=numeric,sorting=ynt]{biblatex}
+
+\geometry{letterpaper,scale=0.8}
+\setstretch{1.2}
+\addbibresource{/Users/zhengz/Desktop/Math/Workspace/Readings/Readings/Readings.bib}
+
+\pagestyle{fancy}
+\newlength{\pageoffset}
+\setlength{\pageoffset}{2cm}% use whatever you like
+\fancyheadoffset[LE,RO]{\pageoffset}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE]{\makebox[\pageoffset][l]{\bfseries\thepage}\bfseries\leftmark}
+\fancyhead[RO]{\bfseries\rightmark\makebox[\pageoffset][r]{\bfseries\thepage}}
+\fancypagestyle{plain}{
+    \fancyhead{} % get rid of headers
+    \renewcommand{\headrulewidth}{0pt} % and the line
+                       }
+\setlength{\headheight}{15pt}
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}[theorem]{Question}
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem*{notation}{Notation}
+
