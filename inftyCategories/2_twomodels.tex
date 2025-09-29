@@ -1,2 +1,41 @@
-\chapter{2 models for \((\infty,1)-categories\)}
+\chapter{2 models for \((\infty,1)\)-categories}
 
+In this part, we introduce two models for \((\infty,1)\)-categories. One is based on simplicial sets satisfying certain horn extension properties, the other is based on simplicial categories. These two models come with two model structure respectively, and the coherent nerve construction of Cordier can be used to show that they are Quillen equivalent. 
+
+\section{Basics on \(\infty\)-categories}
+
+Let us first introduce some basic notions related to simplicial sets. 
+\begin{definition}[Category of finite ordinals]
+    We define a category \(\Delta\) as follows: 
+    \begin{enumerate}
+        \item The objects are linearly order sets of the form \([n]\) for every integer \(n\geq 0\)
+              \[[n]:=(0<1<\cdots<n).\]
+        \item Given \(m,n\geq 0\), a morphism \(f:[m]\rightarrow [n]\) in \(\Delta\) is an order-preserving map. Said differently, for any \(0\leq i\leq j\leq m\), we have \(0\leq f(i)\leq f(j)\leq n\).
+     \end{enumerate}
+\end{definition}
+
+There are two important classes of maps: one is the unique coface map 
+\[d^k:[n-1]\rightarrow [n],\ \ \ 0\leq k\leq n\]
+which does not have \(k\) in its image and is injective. The other is the unique codegeneracy map 
+\[s^k:[n+1]\rightarrow [n],\ \ \ 0\leq k\leq n\]
+which hits \(k\) twice and is surjective. They satisfy a list of cosimplicial identities, see~\cite{goerssSimplicialHomotopyTheory2009}. Now we define the simplicial sets as contravariant functors. 
+
+\begin{definition}[Simplicial sets] 
+    A simplicial set \(X\) is a contravariant functor \(X:\Delta^{op}\rightarrow \mathcal{Sets}\). They form a category where the morphisms are natural transformations. For a simplicial set \(X\), we write \(X_n:=X([n])\) as its values. The face maps are \(d_k=X(d^k)\) and the degeneracy maps are \(s_k=X(s^k)\). They satisfy the corresponding simplicial identities.
+\end{definition}
+
+We can associate a simplicial set to a category using the nerve construction. For each fixed \(n\geq 0\), we can view \([n]\) as a category as follows:
+\begin{itemize}
+    \item We have \(n+1\) objects: the number \(0,1,\ldots,n\).
+    \item For \(0\leq i\leq j\leq n\), we have a unique morphism \(i\rightarrow j\) (if \(i=j\), this is the unique identity morphism of \(i\)). The composition of morphisms is given by the transitivity of \(\leq\).  
+\end{itemize}
+
+\begin{example}
+    Let \(\mathcal{C}\) be a category. The nerve of \(\mathcal{C}\) is a simplicial set \(N(\mathcal{C})\) given by 
+    \[N(\mathcal{C})_n:=\text{Fun}([n],\mathcal{C})\]
+    for each \(n\geq 0\). Namely, all functors from the category \([n]\) to the category \(\mathcal{C}\). Here \(N(\mathcal{C})_n\) can be viewed as a string of \(n\) composable morphisms in \(\mathcal{C}\):
+    \[C_0\xrightarrow{f_1}C_1\xrightarrow{f_2}\cdots\xrightarrow{f_{n}}C_n\]
+    As a special case, consider \(\mathcal{C}=\Delta\). Fix \(n\geq 0\), the nerve \(N([n])\) is a simplicial set. For every \(m\geq 0\), we have 
+    \[N([n])_m=\text{Fun}([m],[n])=\hom_\Delta([m],[n]).\]
+    Because the functors from the category \([m]\) to \([n]\) are exactly the morphism from \([m]\) to \([n]\) if we view them as objects in \(\Delta\). This simplicial set \(N([n])=\hom_\Delta(-,[n])\) is usually denoted as \(\Delta^n\), which is the simplicial set represented by \([n]\in \Delta\).
+\end{example}

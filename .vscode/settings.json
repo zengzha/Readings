@@ -1,0 +1,150 @@
+{"latex-workshop.latex.tools": [
+    {
+     "name": "latexmk",
+     "command": "latexmk",
+     "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "-pdf",
+      "-outdir=%OUTDIR%",
+      "%DOC%"
+     ],
+     "env": {}
+    },
+    {
+     "name": "xelatex",
+     "command": "xelatex",
+     "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+     ],
+     "env": {}
+    },
+    {
+     "name": "pdflatex",
+     "command": "pdflatex",
+     "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "%DOC%"
+     ],
+     "env": {}
+    },
+    {
+     "name": "biber",
+     "command": "biber",
+     "args": [
+      "%DOCFILE%"
+     ],
+     "env": {}
+    }
+   ],
+   "latex-workshop.latex.recipes": [
+    {
+     "name": "pdfLaTeX x2",
+     "tools": [
+      "pdflatex", "pdflatex"
+     ]
+    },
+    {
+     "name": "latexmk 🔃",
+     "tools": [
+      "latexmk"
+     ]
+    },
+    {
+     "name": "xelatex",
+     "tools": [
+      "xelatex"
+     ]
+    },
+    {
+     "name": "pdflatex ➞ biber ➞ pdflatex`×2",
+     "tools": [
+      "pdflatex",
+      "biber",
+      "pdflatex",
+      "pdflatex"
+     ]
+    },
+    {
+    "name": "xelatex ➞ biber ➞ xelatex`×2",
+    "tools": [
+      "xelatex",
+      "biber",
+      "xelatex",
+      "xelatex"
+     ]
+    }
+   ],
+   "latex-workshop.latex.recipe.default":  "pdflatex ➞ biber ➞ pdflatex`×2",
+   "workbench.editorAssociations": {
+     "*.pdf": "pdf.preview"
+   },
+   "overleaf-workshop.pdfViewer.themes": {
+     "default": {
+       "fontColor": "#000000",
+       "bgColor": "#FFFFFF"
+     },
+     "light": {
+       "fontColor": "#000000",
+       "bgColor": "#F5F5DC"
+     },
+     "dark": {
+       "fontColor": "#FBF0D9",
+       "bgColor": "#4B4B4B"
+     }
+   },
+   "git.autofetch": true,
+   "files.exclude": {
+     "**/*.aux": true,
+     "**/*.bcf": true,
+     "**/*.log": true,
+     "**/*.out": true,
+     "**/*.synctex.gz": true,
+     "**/*.xml": true,
+     "**/*.bbl":true
+   },
+   "workbench.settings.applyToAllProfiles": [
+     "files.exclude"
+   ],
+   "git.enableSmartCommit": true,
+   "git.confirmSync": false,
+   "editor.cursorSmoothCaretAnimation": "on",
+   "editor.cursorBlinking": "expand",
+   "editor.wordWrap": "on",
+   "workbench.iconTheme": "material-icon-theme",
+   "workbench.colorTheme": "JellyFish",
+   "latex-workshop.latex.autoClean.run": "onBuilt",
+   "ltex.dictionary": {
+      "en-US": ["homotopy","fibration","simplicial","Künneth","pushout","endomorphism","colimit","isomorphisms","pushouts","surjective","Desmos","asymptotes","subextension","abelian","cokernel","orientable","non-orientable","cofiber","cocycle","coboundary","monic","Incomparability","noetherian","Hausdoff","subcomplex","surjection","Serre","subcomplexes","homeomorphism","nilpotent","coface","codegeneracy","cosimplicial"]
+   },
+   "bookmarks.navigateThroughAllFiles": false,
+   "terminal.integrated.inheritEnv": false,
+   "notebook.lineNumbers": "on",
+  "breadcrumbs.enabled": false,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#1f6fd0",
+    "activityBar.background": "#1f6fd0",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#ee90bb",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#1f6fd0",
+    "statusBar.background": "#1857a4",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#1f6fd0",
+    "statusBarItem.remoteBackground": "#1857a4",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#1857a4",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#1857a499",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#1857a4"
+   }
