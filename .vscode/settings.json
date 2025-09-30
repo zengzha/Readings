@@ -121,7 +121,7 @@
    "workbench.colorTheme": "JellyFish",
    "latex-workshop.latex.autoClean.run": "onBuilt",
    "ltex.dictionary": {
-      "en-US": ["homotopy","fibration","simplicial","Künneth","pushout","endomorphism","colimit","isomorphisms","pushouts","surjective","Desmos","asymptotes","subextension","abelian","cokernel","orientable","non-orientable","cofiber","cocycle","coboundary","monic","Incomparability","noetherian","Hausdoff","subcomplex","surjection","Serre","subcomplexes","homeomorphism","nilpotent","coface","codegeneracy","cosimplicial"]
+      "en-US": ["homotopy","fibration","simplicial","Künneth","pushout","endomorphism","colimit","isomorphisms","pushouts","surjective","Desmos","asymptotes","subextension","abelian","cokernel","orientable","non-orientable","cofiber","cocycle","coboundary","monic","Incomparability","noetherian","Hausdoff","subcomplex","surjection","Serre","subcomplexes","homeomorphism","nilpotent","coface","codegeneracy","cosimplicial","coequalizer"]
    },
    "bookmarks.navigateThroughAllFiles": false,
    "terminal.integrated.inheritEnv": false,
