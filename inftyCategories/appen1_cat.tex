@@ -1,0 +1,90 @@
+\chapter{Some category theory}\label{AppenA}
+Let \(\mathcal{A}\) be a small category. We call the category of contravariant functors
+\[\mathcal{P}(\mathcal{A}):=\t{Fun}(\mathcal{A}^{op},\mathcal{Set})\]
+the presheaf category over \(\mathcal{A}\). Suppose \(\mathcal{C}\) is a cocomplete category, i.e., \(\mathcal{C}\) admits all small colimits. We have the Yoneda embedding: \(y:\mathcal{A}\rightarrow \mathcal{P}(\mathcal{A})\). Given a covariant functor \(\mathcal{F}:\mathcal{A}\rightarrow \mathcal{C}\), we want to extend \(\mathcal{F}\) to \(\mathcal{P}(\mathcal{A})\), namely construct the following dotted arrow, making the diagram 
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7QX0iXSxbMSwwLCJcXG1hdGhjYWx7Q30iXSxbMCwxLCJcXG1hdGhjYWx7UH0oXFxtYXRoY2Fse0F9KSJdLFswLDEsIlxcbWF0aGNhbHtRfSJdLFswLDIsInkiLDJdLFsyLDEsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+    {\mathcal{A}} & {\mathcal{C}} \\
+    {\mathcal{P}(\mathcal{A})}
+    \arrow["{\mathcal{F}}", from=1-1, to=1-2]
+    \arrow["y"', from=1-1, to=2-1]
+    \arrow[dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+commute. Even better, this extension admits a right adjoint. The statement will be made precise, following the book~\cite{cisinskiHigherCategoriesHomotopical2019}. We first show that for a presheaf \(X\in \mathcal{P}(A)\), \(X\) can be written as the colimit of representable functors. For any object \(a\in \mathcal{A}\), we denote by \(h_a\) the representable functor \(\hom_{\mathcal{A}}(-,a)\) in \(\mathcal{P}(\mathcal{A})\).
+\begin{definition}[Category of elements]
+     Let \(\mathcal{A}\) be a category and \(X\in \mathcal{P}(\mathcal{A})\) is a presheaf over \(\mathcal{A}\). We define the category of elements of \(X\) (denoted by \(\mathcal{A}/X\)) as follows:
+     \begin{itemize}
+      \item The objects are \((a,s)\) where \(a\) is an object of \(\mathcal{A}\) and \(s\) is a morphism in \(\hom_{\mathcal{P}(\mathcal{A})}(h_a,X)\), which can be viewed as a section \(s\in X(a)\) by Yoneda lemma.
+      \item The morphisms in \(\mathcal{A}/X\) are given by a morphism \(u:a\rightarrow b\) in \(\mathcal{A}\). By Yoneda lemma, is a commutative diagram 
+      % https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX2EiXSxbMiwwLCJoX2IiXSxbMSwxLCJYIl0sWzAsMiwicyIsMl0sWzEsMiwidCJdLFswLDEsInVfKiJdXQ==
+      \[\begin{tikzcd}
+          {h_a} && {h_b} \\
+          & X
+          \arrow["{u_*}", from=1-1, to=1-3]
+          \arrow["s"', from=1-1, to=2-2]
+          \arrow["t", from=1-3, to=2-2]
+        \end{tikzcd}\]
+     \end{itemize}
+\end{definition}
+Naturally we have a faithful functor 
+\[\mathcal{A}/X\rightarrow \mathcal{P}(\mathcal{A})\]
+sending \((a,s)\) to \(h_a\). The collection of maps 
+\[s:h_a\rightarrow X\]
+for \((a,s)\in \mathcal{A}/X\) gives a cocone over \(X\). And we have the following.
+\begin{proposition}    
+     Any \((a,s)\in \t{Ob}(\mathcal{A}/X)\) gives rise to a morphism \(s:h_a\rightarrow X\). If \((a,s),(b,t)\) are two objects in \(\mathcal{A}/X\) and \(u:a\rightarrow b\) is a morphism in \(\mathcal{A}\), we have a commutative triangle 
+     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX2EiXSxbMiwwLCJoX2IiXSxbMSwxLCJYIl0sWzAsMiwicyIsMl0sWzEsMiwidCJdLFswLDEsInUiXV0=
+     \[\begin{tikzcd}
+         {h_a} && {h_b} \\
+         & X
+         \arrow["u", from=1-1, to=1-3]
+         \arrow["s"', from=1-1, to=2-2]
+         \arrow["t", from=1-3, to=2-2]
+       \end{tikzcd}\]
+      Moreover, \(X\) can be written as colimit of such functors.
+      \[X\cong \t{colim}_{(a,s)\in \mathcal{A}/X}h_a\]
+\end{proposition}
+
+If \(\mathcal{A}\) is a small category, then \(\mathcal{P}(\mathcal{A})\) is a locally small category. The covariant functor \(\mathcal{F}:\mathcal{A}\rightarrow \mathcal{C}\) gives us a functor of evaluation at \(\mathcal{F}\):
+\begin{align*}
+     \mathcal{F}^*:\mathcal{C}&\rightarrow \mathcal{P}(\mathcal{A}),\\ 
+                   Y&\mapsto \hom_\mathcal{C}(\mathcal{F}(-),Y)
+\end{align*}
+
+\begin{proposition}[Kan]
+     The functor \(\mathcal{F}^*\) has a left adjoint 
+     \[\mathcal{F}_!:\mathcal{P}(\mathcal{A})\rightarrow \mathcal{C}.\]
+     Moreover, for any object \(a\) in \(\mathcal{A}\), there is a unique natural isomorphism 
+     \[\mathcal{F}(a)\cong \mathcal{F}_!(h_a)\]
+     such that, for any object \(Y\in \mathcal{C}\), the induced bijection gives the adjunction formula
+     \[\hom_\mathcal{C}(\mathcal{F}_!(h_a),Y)\cong \hom_\mathcal{C}(\mathcal{F}(a),Y)\cong \hom_{\mathcal{P}(\mathcal{A})}(h_a,\mathcal{F}^*(Y)).\]
+\end{proposition}
+\begin{proof}
+    Let \(X\in \mathcal{P}(\mathcal{A})\) be a presheaf. By the previous proposition, we know that 
+    \[X\cong \t{colim}_{(a,s)}h_a.\]
+    Let \(p:\mathcal{A}/X\rightarrow \mathcal{A}\) be the projection functor sending \((a,s)\) to \(a\in \mathcal{A}\). Define
+   \begin{align*}
+        \mathcal{F}_!(X):&=\t{colim}_{(a,s)}(\mathcal{F}\circ p)(a,s)\\ 
+                         &=\t{colim}_{(a,s)}\mathcal{F}(a).
+   \end{align*}
+   When \(X=h_a\) is representable, we get the canonical isomorphism 
+   \[\mathcal{F}_!(h_a)\cong \mathcal{F}(a)\]
+   because \((a,id)\) is the final object in \(\mathcal{A}/h_a\). Recall that the \(\hom\) functor preserves limits, so we have 
+    \begin{align*}
+         \hom_\mathcal{C}(\mathcal{F}_!(X),Y)&\cong \hom_\mathcal{C}(\t{colim}_{(a,s)}\mathcal{F}(a),Y)\\ 
+                                             &\cong \t{lim}_{(a,s)}\hom_\mathcal{C}(\mathcal{F}(a),Y)\\ 
+                                            &\cong \t{lim}_{(a,s)}\hom_{\mathcal{P}(\mathcal{A})}(h_a,\mathcal{F}^*(Y))\\
+                                           &\cong \hom_{\mathcal{P}(\mathcal{A})}(\t{colim}_{(a,s)}h_a,\mathcal{F}^*(Y))\\ 
+                                           &\cong \hom_{\mathcal{P}(\mathcal{A})}(X,\mathcal{F}^*(Y)). 
+     \end{align*}
+    This proves that \(\mathcal{F}_!\) is left adjoint to \(\mathcal{F}^*\).
+\end{proof}
+
+\begin{example}
+    Let \(\mathcal{C}=\mathcal{Top}\) be the category of topological spaces, which is cocomplete. Consider the functor \(\mathcal{F}:\Delta\rightarrow \mathcal{Top}\) mapping \([n]\) to the standard \(n\)-simplex \(\Delta^n_{Top}\) in \(\mathbb{R}^{n+1}\):
+    \[\Delta^n_{Top}=\left\{ (t_0,\ldots,t_n)\in \mathbb{R}^{n+1}\mid \sum_{i=0}^{n}t_i=1, t_i\geq 0 \right\}.\]
+    The functor of evaluation at \(\mathcal{F}\) is exactly 
+    \[\mathcal{F}^*([n])=\hom_{\mathcal{Top}}(\Delta^n_{Top},-)\]
+    which is the singular functor \(\t{Sing}_n(-)\). It is right adjoint to the geometric realization functor \(|-|\), and we recover the familiar adjunction formula
+    \[\hom_{\mathcal{Top}}(|X|,Y)\cong \hom_{\mathcal{sSet}}(X,\t{Sing}(Y)).\] 
+\end{example}

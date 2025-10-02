@@ -46,5 +46,29 @@
 			"    $1",
 			"\\end{proof}"
 		]
+	},
+	"Proposition":{
+		"prefix": "prop",
+		"body": [
+            "\\begin{proposition}[$1]",
+			"     $2",
+			"\\end{proposition}"
+		]
+	},
+	"Remark":{
+		"prefix": "rem",
+		"body": [
+            "\\begin{remark}",
+			"     $1",
+			"\\end{remark}"
+		]
+	},
+	"Align":{
+		"prefix": "align",
+		"body": [
+            "\\begin{align*}",
+			"     $1",
+			"\\end{align*}"
+		]
 	}
 }
