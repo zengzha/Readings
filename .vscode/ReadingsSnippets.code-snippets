@@ -70,5 +70,17 @@
 			"     $1",
 			"\\end{align*}"
 		]
+	},
+	"infinity":{
+		"prefix": "ift",
+		"body": "\\infty"
+	},
+	"enumerate":{
+		"prefix": "enum",
+		"body": [
+			"\\begin{enumerate}[$1]",
+			"  \\item $2",
+			"\\end{enumerate}"
+		]
 	}
 }

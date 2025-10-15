@@ -41,7 +41,15 @@
       "%DOCFILE%"
      ],
      "env": {}
-    }
+    },
+    { 
+     "name": "Hide synctex",    
+     "command": "/bin/zsh",      
+     "args": [        "-lc",        // Search both the root dir and the output dir (if defined) and hide *.synctex.gz        
+     "for d in \"%DIR%\" \"%OUTDIR%\"; do [ -d \"$d\" ] && find \"$d\" -type f -name \"*.synctex.gz\" -exec chflags hidden {} +; done"
+            ],    
+    "env": {}  
+   }
    ],
    "latex-workshop.latex.recipes": [
     {
@@ -68,7 +76,8 @@
       "pdflatex",
       "biber",
       "pdflatex",
-      "pdflatex"
+      "pdflatex",
+      "Hide synctex"
      ]
     },
     {

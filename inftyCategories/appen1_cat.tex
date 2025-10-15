@@ -80,11 +80,26 @@ If \(\mathcal{A}\) is a small category, then \(\mathcal{P}(\mathcal{A})\) is a l
     This proves that \(\mathcal{F}_!\) is left adjoint to \(\mathcal{F}^*\).
 \end{proof}
 
-\begin{example}
-    Let \(\mathcal{C}=\mathcal{Top}\) be the category of topological spaces, which is cocomplete. Consider the functor \(\mathcal{F}:\Delta\rightarrow \mathcal{Top}\) mapping \([n]\) to the standard \(n\)-simplex \(\Delta^n_{Top}\) in \(\mathbb{R}^{n+1}\):
-    \[\Delta^n_{Top}=\left\{ (t_0,\ldots,t_n)\in \mathbb{R}^{n+1}\mid \sum_{i=0}^{n}t_i=1, t_i\geq 0 \right\}.\]
-    The functor of evaluation at \(\mathcal{F}\) is exactly 
-    \[\mathcal{F}^*([n])=\hom_{\mathcal{Top}}(\Delta^n_{Top},-)\]
-    which is the singular functor \(\t{Sing}_n(-)\). It is right adjoint to the geometric realization functor \(|-|\), and we recover the familiar adjunction formula
-    \[\hom_{\mathcal{Top}}(|X|,Y)\cong \hom_{\mathcal{sSet}}(X,\t{Sing}(Y)).\] 
-\end{example}
+Now we consider \(\mathcal{P}(\mathcal{A})\) is the category of simplicial sets, i.e., when \(\mathcal{A}\) is the category of finite ordinals. Let \(\mathcal{F}:\Delta\rightarrow \mathcal{C}\) be a covariant functor from \(\Delta\) to a cocomplete, locally small category. Suppose \(Y\in \mathcal{C}\) is an object, we can define 
+\[(\mathcal{F}^*Y)_n:=\hom_{\mathcal{C}}(\mathcal{F}[n],Y).\]
+We have \(d_i:(\mathcal{F}^*Y)_n\rightarrow (\mathcal{F}^*Y)_{n-1}\) is given by the precomposition with \(\mathcal{F}d^i:\mathcal{F}[n-1]\rightarrow \mathcal{F}[n]\) and \(s_i: (\mathcal{F}^*Y)_n\rightarrow (\mathcal{F}^*Y)_{n+1}\) is given by the precomposition with \(\mathcal{F}s^i:\mathcal{F}[n+1]\rightarrow \mathcal{F}[n]\). Checking the simplicial identities implies that \(\mathcal{F}^*Y\) is a simplicial set. The left adjoint \(\mathcal{F}_!\) is the left Kan extension of \(\mathcal{F}\) along the Yoneda embedding \(y\):  
+\[\begin{tikzcd}
+    {\mathcal{\Delta}} & {\mathcal{C}} \\
+    {\mathcal{sSet}}
+    \arrow["{\mathcal{F}}", from=1-1, to=1-2]
+    \arrow["y"', from=1-1, to=2-1]
+    \arrow["L",dashed, from=2-1, to=1-2]
+  \end{tikzcd}\]
+From our discussion above, the left Kan extension \(L\) is just \(\mathcal{F}_!\), and it is left adjoint to \(\mathcal{F}^*\). There is a more explicit construction of \(L\) using the copower, see~\cite{riehlLeisurelyIntroductionSimplicial}.
+\begin{definition}[copower]
+     For any set \(S\) and object \(c\in \mathcal{C}\), the \textbf{copower} or \textbf{tensor} of \(c\) by \(S\), denoted \(S\cdot c\), is simply the coproduct \(\bigsqcup_S c\): copies of \(c\) indexed by \(S\).
+\end{definition}
+If \(X\) is a simplicial set, we may form copowers
+\[X_m\cdot \mathcal{F}[n]\]
+for any \(n,m\geq 0\). A morphism \(f:[n]\rightarrow [m]\) induces a map 
+\[f_*:X[m]\cdot \mathcal{F}[n]\rightarrow X[m]\cdot \mathcal{F}[m]\]
+and a map 
+\[f^*:X[m]\cdot \mathcal{F}[n]\rightarrow X[n]\cdot \mathcal{F}[n].\]
+The left Kan extension for a simplicial set \(X\) is 
+\[LX:=\t{coeq}\ (\bigsqcup_{f:[n]\rightarrow [m]}X_m\cdot \mathcal{F}[n]\mathrel{\mathop{\rightrightarrows}^{f_*}_{f^*}}\bigsqcup_{[n]}X_n\cdot \mathcal{F}[n]).\]
+
