@@ -4,11 +4,14 @@
 \usepackage{amsthm}
 \usepackage{indentfirst}
 \usepackage{enumerate}
+\usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{geometry}
+\usepackage{xcolor}
 \usepackage{mathrsfs}
 \usepackage{bclogo}
 \usepackage{mathtools}
+\usepackage{quiver}
 \usepackage{setspace}
 \usepackage{comment}
 \usepackage{fancyhdr}
@@ -65,5 +68,15 @@
 \theoremstyle{definition}
 \newtheorem*{notation}{Notation}
 
+%Define the claim environment
+\newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
+\newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
+
 \renewcommand{\hom}{\operatorname{Hom}}
 \renewcommand{\t}[1]{\mathrm{#1}}
+\newcommand{\iif}{\ \ \mathrm{if}\ \ }
+\newcommand{\colim}{\mathrm{colim}}
+\newcommand{\dep}{\mathrm{depth}}
+\newcommand{\codim}{\mathrm{codim}}
+\newcommand{\ann}{\mathrm{ann}\,}
+\newcommand{\ext}{\mathrm{Ext}}

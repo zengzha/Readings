@@ -1,0 +1,359 @@
+\chapter{Categorical constructions with \(\infty\)-categories}
+This chapter focuses on extending some key constructions and notions from the ordinary category theory to the \(\infty\)-categories (or more generally, the simplicial sets). The following principals need to be satisfied:
+
+\begin{enumerate}[(a)]
+  \item The extensions are compatible with the fully faithful nerve functor \(N:\mathcal{Cat}\rightarrow \mathcal{sSet}\).
+  \item A homotopy coherent version of ordinary category theory.
+  \item They are compatible with the inclusion from \(\infty\)-categories to the simplicial sets. 
+  \item They are invariant under equivalence of \(\infty\)-categories.
+\end{enumerate}
+
+We will first introduce the functors between \(\infty\)-categories, and try to convince the reader why this is a homotopy coherent concept. Next, we are going to define the limits and colimits for the \(\infty\)-categories, using the overcategories and undercategories. Lastly, we discuss the concepts of Kan extension in the setting of \(\infty\)-categories.
+
+\section{Functors}
+
+Recall that \(infty\)-categories are simplicial sets with right lifting properties with respect to inner horn inclusions. We can use the definition of maps between simplicial sets to define functors between \(\infty\)-categories.
+
+\begin{definition}[Functors]
+     Let \(K\) be a simplicial set and \(\mathcal{C}\) be an \(\infty\)-category. A \textbf{functor} 
+     \[F:K\rightarrow \mathcal{C}\]
+     is a map of simplicial set. Similarly, a \textbf{natural transformation} is a map of simplicial sets 
+     \[\eta:\Delta^1\times K\rightarrow \mathcal{C}.\]
+     More generally, the \textbf{space of functors} \(\t{Fun}(K,\mathcal{C})\) is a simplicial set whose \(n\)-simplices are given by
+     \[\t{Fun}(K,\mathcal{C})_n:=\t{Map}_{\mathcal{sSet}}(K,\mathcal{C})_n=\hom_{\mathcal{sSet}}(\Delta^n\times K,\mathcal{C}).\]
+\end{definition}
+
+This definition agrees with the classical definition of functors if the simplicial set is the nerve of an ordinary category. 
+
+\begin{lemma}
+    For categories \(A,B\), there is a natural isomorphism of simplicial sets 
+    \[N(\t{Fun}(A,B))\cong \t{Fun}(NA,NB).\]
+\end{lemma}
+
+\begin{proof}
+    For any \([n]\in \Delta\), we have the following natural bijections:
+    \begin{align*}
+         N(\t{Fun}(A,B))_n&=\hom_{Cat}([n],\t{Fun}(A,B))\\ 
+                          &\cong \hom_{Cat}([n]\times A,B)\\ 
+                          &\cong \hom_{sSet}(N([n]\times A),NB)\\
+                          &\cong \hom_{sSet}(N[n]\times NA,NB)\\ 
+                          &\cong \hom_{sSet}(\Delta^n\times NA,NB)\\ 
+                          &=\t{Fun}(NA,NB).
+    \end{align*}
+    Here we use the adjointness of \(\t{Fun}(A,-)\) and \(-\times A\), the full faithfulness of \(N\), the fact that \(N\) preserves products, and the isomorphism \(N[n]\cong \Delta^n\).
+\end{proof}
+
+The following example illustrates that the definition of functor encodes the homotopy coherent information we want. 
+
+\begin{example}
+    Let \(A\in \mathcal{Cat}\) be an ordinary category and \(\mathcal{M}\) be a locally fibrant simplicial category. The coherent nerve \(N_\Delta(\mathcal{M})\) is an \(\infty\)-category. Consider the functor \(F:NA\rightarrow N_\Delta(\mathcal{M})\). We are going to see how the arrows in \(A\) are mapped to diagrams in \(N_\Delta(\mathcal{M})\). 
+    \begin{enumerate}[(a)]
+      \item For any arrow \(x\rightarrow y\) in \(A\), it can be viewed as a 1-simplex \(s:\Delta^1\rightarrow NA\), and thus \(F(s):\Delta^1\rightarrow N_\Delta(\mathcal{M})\) is a 1-simplex.
+      \item Similarly, any composable arrows \(x\xrightarrow{f}y\xrightarrow{g} z\) gives rise to a 2-simplex \(\sigma:\Delta^2\rightarrow NA\), and we can obtain a 2-simplex \(F(\sigma):\Delta^2\rightarrow N_\Delta(\mathcal{M})\). By the adjointness of \((C[-],N_\Delta)\), this 2-simplex can be viewed as a map \(C[\Delta^2]\rightarrow \mathcal{M}\), namely a diagram 
+      % https://q.uiver.app/#q=WzAsMyxbMCwxLCJGeCJdLFsyLDEsIkZ6Il0sWzEsMCwiRnkiXSxbMCwyLCJGZiJdLFswLDEsIkYoZ1xcY2lyYyBmKSIsMl0sWzIsMSwiRmciXSxbNCwyLCIiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6MzB9fV1d
+      \[\begin{tikzcd}
+          & Fy \\
+          Fx && Fz
+          \arrow["Fg", from=1-2, to=2-3]
+          \arrow["Ff", from=2-1, to=1-2]
+          \arrow[""{name=0, anchor=center, inner sep=0}, "{F(g\circ f)}"', from=2-1, to=2-3]
+          \arrow[between={0.3}{0.7}, Rightarrow, from=0, to=1-2]
+        \end{tikzcd}\]
+      Note that here it also encodes the information of a specific homotopy from \(F(g\circ f)\) to \(Fg\circ Ff\).
+      \item Now consider 3 composable arrows 
+      \[x\xrightarrow{f}y\xrightarrow{g}z\xrightarrow{h}w\]
+      in \(A\). The composition can be viewed as a 3-simplex \(\tau:\Delta^3\rightarrow NA\):
+      \begin{figure}[!htb]
+        \centering 
+        \includegraphics[width=0.2\linewidth]{3compose.png}
+        \caption{Composition of 3 arrows}
+      \end{figure}
+      Now apply \(F\), and we obtain a 3-simplex \(F(\tau):\Delta^3\rightarrow N_\Delta(\mathcal{M})\), each face has a homotopy, and this 3-simplex can be viewed as the commutative diagram 
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJGKGhcXGNpcmMgZ1xcY2lyYyBmKSJdLFsyLDAsIkYoaClcXGNpcmMgRihnXFxjaXJjIGYpIl0sWzAsMSwiRihoXFxjaXJjIGcpXFxjaXJjIEYoZikgIl0sWzIsMSwiRihoKVxcY2lyYyBGKGcpXFxjaXJjIEYoZikiXSxbMCwyXSxbMiwzXSxbMCwxXSxbMSwzXV0=
+      \[\begin{tikzcd}
+          {F(h\circ g\circ f)} && {F(h)\circ F(g\circ f)} \\
+          {F(h\circ g)\circ F(f) } && {F(h)\circ F(g)\circ F(f)}
+          \arrow[from=1-1, to=1-3]
+          \arrow[from=1-1, to=2-1]
+          \arrow[from=1-3, to=2-3]
+          \arrow[from=2-1, to=2-3]
+        \end{tikzcd}\]
+        where arrows are homotopy in each face. The commutativity comes from the fact that \(\t{Map}_{C[\Delta^3]}(0,3)\) is isomorphic to the product \(\Delta^1\times \Delta^1\).
+    \end{enumerate}
+\end{example}
+
+The following proposition tells us that the equivalence of \(\infty\)-categories behave well under the definition of functors.
+
+\begin{proposition}
+     Let \(\mathcal{C}\) and \(\mathcal{D}\) be \(\infty\)-categories, and \(K\) and \(L\) be simplicial sets.
+     \begin{enumerate}[(i)]
+       \item The simplicial set \(\t{Fun}(K,\mathcal{C})\) is an \(\infty\)-category.
+       \item If \(\mathcal{C}\rightarrow \mathcal{D}\) is an equivalence of \(\infty\)-categories, then the induced map 
+       \[\t{Fun}(K,\mathcal{C})\rightarrow \t{Fun}(K,\mathcal{D})\]
+       is also an equivalence of \(\infty\)-categories.
+       \item If \(K\rightarrow L\) is a categorical equivalence of simplicial sets, then the induced map 
+       \[\t{Fun}(L,\mathcal{C})\rightarrow \t{Fun}(K,\mathcal{C})\]
+       is an equivalence of \(\infty\)-categories.
+     \end{enumerate}
+\end{proposition}
+
+The proof relies on a careful analysis of the Joyal model structure for simplicial sets.
+
+One part that is worth pointing out is that 
+
+\section{Slice categories}
+The purpose of this section is to establish some useful constructions to help define limits and colimits in the \(\infty\)-categories in the next part. The way to do that is to realize the colimits as initial objects in the undercategories. Most things we discussed below can be dualized. Recall the classical situation in the ordinary category theory. Let \(A\) be an ordinary category and fix an object \(X\in A\). We can form an overcategory \(A_{/X}\) as follows:
+\begin{itemize}
+  \item Objects are morphisms \(Y\rightarrow X\) in \(A\).
+  \item Morphisms from an object \(Y\rightarrow X\) to \(Z\rightarrow X\) is a triangle:
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJZIl0sWzIsMCwiWiJdLFsxLDEsIlgiXSxbMCwxXSxbMCwyXSxbMSwyXV0=
+  \[\begin{tikzcd}
+      Y && Z \\
+      & X
+      \arrow[from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-2]
+      \arrow[from=1-3, to=2-2]
+    \end{tikzcd}\]
+\end{itemize}
+
+A similar but dual construction gives the undercategory \(A_{X/}\) (consider maps from \(X\)). The overcategory \(A_{/X}\) can be characterized using an adjointness relation. For that, we need to first define the join construction.
+
+\begin{definition}[Join in ordinary categories]
+     Let \(A\) and \(B\) be categories. We can form a new category \(A\star B\), the \textbf{join} of \(A\) and \(B\), as follows. The objects of \(A\star B\) are the disjoint union of objects in \(A\) and objects in \(B\). For the morphisms, we have the following:
+     \[\hom_{A\star B}(x,y)=\begin{cases}
+      \hom_A(x,y),&\iif x,y\in A,\\ 
+      \hom_B(x,y),&\iif x,y\in B,\\
+      *,&\iif x\in A, y\in B,\\
+      \varnothing,&\iif x\in B, y\in A.
+     \end{cases}\]
+     The composition is completely determined by requiring that \(A\) and \(B\) are full subcategories of \(A\star B\) in the obvious way.
+\end{definition}
+
+Note that this construction is not symmetric in \(A\) and \(B\). Here is a key example.
+
+\begin{example}
+    Let \(A\) be a category and \(B=\left\{ \bullet \right\}\) be the terminal category in \(\mathcal{Cat}\) (one object with one identity morphism). We write \(A^\rhd=A\star \left\{ \bullet \right\} \) as the \textbf{right cone} or \textbf{cocone} on \(A\). It can be viewed as adding a new terminal object \(\infty\) to \(A\). The dual concept is the \textbf{left cone} or \textbf{cone} on \(A\), denoted by \(A^\lhd:=\left\{ \bullet \right\}\star A\). They play an essential role in the definition of colimits and limits. 
+\end{example}
+
+Let \(B\) be a category. Note that to specify an object \(X\) in the category \(A\) is the same as giving a functor 
+\[x:\left\{ \bullet \right\}\rightarrow A\]
+sending the point to \(X\). We have the following bijection 
+\[\hom_{\mathcal{Cat}}(B,A_{/X})\cong \hom_{\mathcal{Cat_x}}(B\star \left\{ \bullet \right\},A)\]
+where on the right-hand side, we only take those functors satisfying that the composition
+\[\left\{ \bullet \right\}\rightarrow B\star \left\{ \bullet \right\}\rightarrow A\]
+sends the point to \(X\). To give a sketch why this works, take a morphism \(s:a\rightarrow b\) in \(B\) and a functor 
+\(F:B\rightarrow A_{/X}\), we can write the morphism \(F(s)\) in \(A_{/X}\) as a triangle 
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJGKGEpIl0sWzIsMCwiRihiKSJdLFsxLDEsIlgiXSxbMCwxXSxbMCwyXSxbMSwyXV0=
+\[\begin{tikzcd}
+    {F(a)} && {F(b)} \\
+    & X
+    \arrow[from=1-1, to=1-3]
+    \arrow[from=1-1, to=2-2]
+    \arrow[from=1-3, to=2-2]
+  \end{tikzcd}\]
+On the right-hand side, the inclusion functor \(B\rightarrow B\star \left\{ \bullet \right\}\) sends the morphism \(s:a\rightarrow b\) to a triangle 
+% https://q.uiver.app/#q=WzAsMyxbMSwxLCJcXGJ1bGxldCJdLFswLDAsImEiXSxbMiwwLCJiIl0sWzEsMF0sWzIsMF0sWzEsMiwicyJdXQ==
+\[\begin{tikzcd}
+    a && b \\
+    & \bullet
+    \arrow["s", from=1-1, to=1-3]
+    \arrow[from=1-1, to=2-2]
+    \arrow[from=1-3, to=2-2]
+  \end{tikzcd}\]
+Now if we apply a functor sending \(\bullet\) to \(X\in A\), then we get the same triangle. The inverse direction is similar. We want to use this adjointness to define a similar thing for simplicial sets. First, we  extend the join construction to simplicial sets.
+
+\begin{definition}[Join of simplicial sets]
+     Let \(K\) and \(L\) be simplicial sets. The simplicial set \(K\star L\), called the join of \(K\) and \(L\), is defined as follows: for each nonempty finite linearly ordered set \(J\), we set 
+     \[(K\star L)(J)=\bigsqcup_{J=I\cup I'}K(I)\times L(I')\]
+     where the union is taken over all decomposition of \(J\) into  disjoint subset \(I\) and \(I'\), satisfying \(i<i'\) for all \(i\in I\) and \(i'\in I'\). Here we allow the possibility that \(I\) or \(I'\) is empty, in which case 
+     \[K(\varnothing)=L(\varnothing)=*.\]
+\end{definition}
+
+More concretely, the \(n\)-simplices in the simplicial set \(K\star L\) are given by 
+\[(K\star L)_n=K_n\cup L_n\cup \bigcup_{i+j=n-1}K_i\times L_j.\]
+The join construction for simplicial sets can be characterized by the following two properties:
+
+\begin{proposition}
+     \begin{enumerate}[(i)]
+       \item The partial join functors 
+       \begin{align*}
+            K\star (-):\mathcal{sSet}&\rightarrow \mathcal{sSet}_{K/},\\
+            (-)\star L:\mathcal{sSet}&\rightarrow \mathcal{sSet}_{L/}
+       \end{align*}
+       preserves colimits. Here \(\mathcal{sSet}_{K/}\) and \(\mathcal{sSet}_{L/}\) are undercategories for simplicial sets \(K\) and \(L\).
+       \item For the standard simplices, we have 
+       \[\Delta^i\star \Delta^j\cong \Delta^{i+j+1}.\]
+       The isomorphism is compatible with the inclusion of \(\Delta^i\) and \(\Delta^j\). 
+     \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Both of these proofs can be done by carefully examining the definition. Note that in (i), the product 
+    \[\times:\mathcal{sSet}\times \mathcal{sSet}\rightarrow \mathcal{sSet}\]
+    is left adjoint, so it commutes with colimits. 
+\end{proof}
+
+This definition of join can be viewed as the correct generalization of joins of categories in the following sense.
+
+\begin{lemma}
+    The nerve is compatible with the join construction in that there is a natural isomorphism
+    \[N(A\star B)\rightarrow N(A)\star N(B).\]
+\end{lemma}
+
+\begin{proof}
+    We check the \(n\)-simplices in the simplicial sets. Recall that 
+    \[N(A\star B)_n=\t{Fun}([n],A\star B).\]
+    The way \([n]\) maps to \(A\star B\) preserving linear order is exactly given by the partition of 
+    \[\left\{ 0<1<2<\cdots<n \right\}\]
+    while allowing empty set. 
+\end{proof}
+
+\begin{remark}
+     Recall the functor \(C[-]\) sending a simplicial set to a simplicial category is colimit-preserving. For simplicial sets \(K\) and \(L\), the simplicial category \(C[K\star L]\) contains \(C[K]\) and \(C[L]\) as full subcategories, but only a unique map 
+     \[C[K\star L]\rightarrow C[K]\star C[L]\]
+     (not isomorphism). This can be shown as an equivalence of simplicial categories~\cite[Corollary 4.2.1.4]{lurieHigherToposTheory2009}.
+\end{remark}
+
+The join construction has nice properties with respect to \(\infty\)-categories. 
+
+\begin{proposition}
+     \begin{enumerate}[(i)]
+       \item If \(\mathcal{C}\) and \(\mathcal{D}\) are \(\infty\)-categories, then the join \(\mathcal{C}\star \mathcal{D}\) is again an \(\infty\)-category.
+       \item If \(F:\mathcal{C}\rightarrow \mathcal{C}'\) and \(G:\mathcal{D}\rightarrow \mathcal{D}'\) are equivalences of \(\infty\)-categories, then the induced map 
+       \[F\star G:\mathcal{C}\star \mathcal{D}\rightarrow \mathcal{C}'\star \mathcal{D}'\]
+       is also an equivalence of \(\infty\)-categories.
+     \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{example}
+    \begin{enumerate}[(i)]
+      \item Similar to the ordinary category theory, we call \(K^\rhd:=K\star \Delta^0\) as the \textbf{right cone} or \textbf{cocone} on \(K\) for a simplicial set \(K\). Dually, \(L^\lhd:=\Delta^0\star L\) is the \textbf{left cone} or \textbf{cone} on a simplicial set \(L\).
+      \item Now let \(K=\Lambda^2_0\) be a horn in \(\Delta^2\). It can be viewed as the following:
+      % https://q.uiver.app/#q=WzAsMyxbMSwwLCIwIl0sWzAsMSwiMSJdLFsyLDEsIjIiXSxbMCwxXSxbMCwyXV0=
+      \[\begin{tikzcd}
+          & 0 \\
+          1 && 2
+          \arrow[from=1-2, to=2-1]
+          \arrow[from=1-2, to=2-3]
+        \end{tikzcd}\]
+      The cocone \((\Lambda^2_0)^\rhd\) is isomorphic to a square \(\Box\cong \Delta^1\times \Delta^1\):
+      % https://q.uiver.app/#q=WzAsNCxbMSwwLCIwIl0sWzAsMSwiMSJdLFsyLDEsIjIiXSxbMSwyLCJcXGJ1bGxldCJdLFswLDFdLFswLDJdLFsxLDNdLFsyLDNdLFswLDNdLFs4LDEsIiIsMSx7InNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0IjoyMH19XSxbOCwyLCIiLDEseyJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6MjB9fV1d
+      \[\begin{tikzcd}
+          & 0 \\
+          1 && 2 \\
+          & \bullet
+          \arrow[from=1-2, to=2-1]
+          \arrow[from=1-2, to=2-3]
+          \arrow[""{name=0, anchor=center, inner sep=0}, from=1-2, to=3-2]
+          \arrow[from=2-1, to=3-2]
+          \arrow[from=2-3, to=3-2]
+          \arrow[between={0.3}{0.8}, Rightarrow, from=0, to=2-1]
+          \arrow[between={0.3}{0.8}, Rightarrow, from=0, to=2-3]
+        \end{tikzcd}\]
+      If \(\mathcal{M}\) is a simplicial category then a diagram in \(N_\Delta(\mathcal{M})\) consists of 5 morphisms and 2 homotopies, commuting up to some coherent homotopy. We also have some dualizing square.
+    \end{enumerate}
+\end{example}
+
+Recall that previously we mentioned fixing an object \(X\) in an ordinary category \(A\) gives us the overcategory \(A_{/X}\) with a bijection 
+\[\hom_{\mathcal{Cat}}(B,A_{/X})\cong \hom_{\mathcal{Cat_x}}(B\star \left\{ \bullet \right\},A)\]
+Here the object \(X\) can be identified with a functor \(\left\{ \bullet \right\}\rightarrow A\). We want to generalize this concept to simplicial sets and to any maps between simplicial sets, not just the inclusion of \(\Delta^0\). 
+
+\begin{definition}[Overcategory]
+     Let \(K\) and \(L\) be simplicial sets and \(p:K\rightarrow L\) be a map of simplicial sets. Define a simplicial set
+     \[(L_{/p})_n:=\hom_{\mathcal{sSet}_p}(\Delta^n\star K,L).\]
+     Note that here we only take maps that satisfy the composition 
+     \[K\rightarrow \Delta^n\star K\rightarrow L\]
+     is equal to \(p\).
+\end{definition}
+
+The universal property holds
+\[\hom_{\mathcal{sSet}}(S,L_{/p})\cong \hom_{\mathcal{sSet}_p}(S\star K,L)\]
+for any simplicial set \(S\). We can prove this by first note it holds for any standard simplices \(\Delta^n\) by definition, and any simplicial set can be viewed as the colimit of standard simplices. The following proposition shows that this construction is well-behaved:
+
+\begin{proposition} 
+     Let \(K\) be a simplicial set and \(\mathcal{C}\) is an \(\infty\)-category. Suppose \(p:K\rightarrow \mathcal{C}\) is a map of simplicial set. Then \(\mathcal{C}_{/p}\) is an \(\infty\)-category. Moreover, if \(q:\mathcal{C}\rightarrow \mathcal{D}\) is an equivalence of \(\infty\)-categories, then the induced map 
+     \[\mathcal{C}_{/p}\rightarrow \mathcal{D}_{/qp}\]
+     is also an equivalence of \(\infty\)-categories. 
+\end{proposition}
+
+\begin{example}
+    We can quickly check the definition of overcategories is compatible with the classical definition. Let \(\mathcal{C}\) be an \(\infty\)-category and \(x\) is an object in \(\mathcal{C}\). The objects, or \(0\)-simplices in \(\mathcal{C}_{/x}\), are given by 
+    \[(\mathcal{C}_{/x})_0=\hom_{\mathcal{sSet}_x}(\Delta^0\star \left\{ \bullet \right\},\mathcal{C}).\]
+    In the right-hand side, we require \(\bullet\) is mapped to \(x\in \mathcal{C}\), so it is given by a morphism \(y\rightarrow x\) where \(y\) is the image of \(\Delta^0\). The morphisms in \((\mathcal{C}_{/x})\) are 1-simplices:
+    \[(\mathcal{C}_{/x})_1=\hom_{\mathcal{sSet}_x}(\Delta^1\star \left\{ \bullet \right\},\mathcal{C}).\]
+    So it is a triangle 
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJ5XzEiXSxbMiwwLCJ5XzIiXSxbMSwxLCJ4Il0sWzAsMV0sWzAsMl0sWzEsMl1d
+    \[\begin{tikzcd}
+        {y_1} && {y_2} \\
+        & x
+        \arrow[from=1-1, to=1-3]
+        \arrow[from=1-1, to=2-2]
+        \arrow[from=1-3, to=2-2]
+      \end{tikzcd}\]
+    This is exactly what we want.
+\end{example}
+
+Dually, we can form the undercategories \(\mathcal{C}_{p/}\), and together they are called the slice \(\infty\)-categories. These constructions are compatible with the nerve functor. 
+
+\begin{lemma}
+    If \(p:A\rightarrow B\) is a functor or ordinary categories, then there is a natural isomorphism of simplicial sets 
+    \[N(B_{/p})\cong N(B)_{/N(p)}\]
+\end{lemma}
+
+\begin{proof}
+    
+\end{proof}
+
+\section{Colimits and limits}
+Now we can discuss the final and initial objects in \(\infty\)-categories, and use them to define colimits and limits. Recall that in an ordinary category, the final object, if exists, admits a unique morphism from all objects, and it is unique up to unique isomorphism. In \(\infty\)-categories, we need a less strict version.
+
+\begin{definition}[Final object]
+     An object \(x\in \mathcal{C}\) of an \(\infty\)-category \(\mathcal{C}\) is a \textbf{final object} if the canonical map \(\mathcal{C}_{/x}\rightarrow \mathcal{C}\) is an acyclic fibration of simplicial sets.
+\end{definition}
+
+This definition has some equivalent reinterpretations.
+
+\begin{proposition}
+     The following is equivalent for an object \(x\in \mathcal{C}\) of an \(\infty\)-category \(\mathcal{C}\).
+     \begin{enumerate}[(i)]
+       \item The object \(x\) is final.
+       \item The mapping spaces \(\t{Map}_{\mathcal{C}}(x',x)\) are acyclic Kan complexes for all \(x'\in \mathcal{C}\).
+       \item Every simplicial sphere \(\alpha:\partial \Delta^n\rightarrow \mathcal{C}\) such that \(\alpha(n)=x\) can be filled to an entire \(n\)-simplex \(\Delta^n\rightarrow \mathcal{C}\).
+     \end{enumerate}
+\end{proposition}
+
+Now before discuss what 'uniqueness' means in the setting of \(\infty\)-categories, we first need to mention full subcategories of an \(\infty\)-category. 
+
+\textcolor{red}{need to fill}
+
+\begin{corollary}\label{uniift}
+  Let \(\mathcal{C}\) be an \(\infty\)-category and \(\mathcal{D}\subseteq \mathcal{C}\) be the full subcategory spanned by the final objects of \(\mathcal{C}\). Then \(\mathcal{D}\) is empty or a contractible Kan complex. 
+\end{corollary}
+
+\begin{lemma}
+    Let \(A\) be a category. An object \(a\in A\) is final if and only if \(N(a)\in N(A)\) is final.
+\end{lemma}
+
+Now we can define the colimits in \(\infty\)-categories. Recall that in an ordinary category, the colimit of an orodinary functor \(p:A\rightarrow B\) consists of an object \(\colim_A p\) in \(B\) together with a universal cocone. Said differently, this can be viewed as an initial object in the category of \(B_{p/}\) of cocones on \(p\). We can extend this definition to \(\infty\)-categories. 
+
+\begin{definition}[colimits]
+     Let \(K\) be a simplicial set and \(\mathcal{C}\) be an \(\infty\)-category. A \textbf{colimit} of a diagram \(p:K\rightarrow \mathcal{C}\) is an initial object in \(\mathcal{C}_{p/}\). An \(\infty\)-category is \textbf{cocomplete} if it admits colimits of all small diagrams.
+\end{definition}
+
+\begin{remark}
+  A colimit of a diagram \(p:K\rightarrow \mathcal{C}\) is an object of \(\mathcal{C}_{p/}\). We may identify this object with a map \(\bar{p}:K^\rhd\rightarrow \mathcal{C}\) extending \(p\). In general, we say that a map \(\bar{p}:K^\rhd\rightarrow \mathcal{C}\) is a colimit diagram if it is a colimit of \(p=\bar{p}|_K\). Sometimes we abuse notations and call \(\bar{p}(\infty)\in \mathcal{C}\) as a colimit of \(p\).
+\end{remark}
+
+It is immediately from Corollary~\ref{uniift} that for every \(p:K\rightarrow \mathcal{C}\) the full subcategory \(\mathcal{D}\subseteq \mathcal{C}_{p/}\) spanned by the colimits of \(p\) is empty or a contractible Kan complex. Also, by definition, the nerve functor is compatible with the notion of colimits. 
+
+\begin{definition}[pushout and pullback]
+     Let \(\mathcal{C}\) be an \(\infty\)-category and \(q:\Box \rightarrow \mathcal{C}\) is a square.
+     \begin{enumerate}[(i)]
+       \item The square \(q\) is a \textbf{pushout} if \(q:(\Lambda^2_0)^\rhd\rightarrow \mathcal{C}\) is a colimiting cocone.
+       \item The square \(q\) is a \textbf{pullback} if \(q:(\Lambda^2_2)^\lhd\rightarrow \mathcal{C}\) is a limiting cone.
+     \end{enumerate}
+\end{definition}

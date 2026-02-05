@@ -82,5 +82,25 @@
 			"  \\item $2",
 			"\\end{enumerate}"
 		]
+	},
+	"MathFrak":{
+		"prefix": "frk",
+		"body": "\\mathfrak{$1}$0"
+	},
+	"claim":{
+		"prefix": "claim",
+		"body": [
+			"\\begin{claim}",
+			"  $1",
+			"\\end{claim}"
+		]
+	},
+	"claimproof":{
+		"prefix": "cmproof",
+		"body": [
+			"\\begin{claimproof}",
+			"  $1",
+			"\\end{claimproof}"
+		]
 	}
 }

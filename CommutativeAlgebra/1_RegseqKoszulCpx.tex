@@ -1,0 +1,213 @@
+\chapter{Regular Sequence and the Koszul Complex}
+
+All rings are assumed to be Noetherian in this chapter.
+\begin{definition}[Regular Sequence]
+     Let \(M\) be an \(R\)-module. An ordered sequence of elements \(x_1,\ldots,x_n\in R\) is called a \textbf{regular sequence} on \(M\) (or an \(M\)-sequence) if the following 2 conditions are satosfied:
+     \begin{enumerate}[(1)]
+       \item \((x_1,\ldots,x_n)M\neq M\),
+       \item For \(i=1,\ldots,n\), \(x_i\) is a nonzerodivisor on \(M/(x_1,\ldots,x_{i-1})M\) (Assume \(x_0=0\)).
+     \end{enumerate}
+\end{definition}
+Note that here \(x_i\) cannot be a zerodivisor in \(M\) for \(1\leq i\leq n\).
+
+We will use a homological tool called the Koszul complex to study the regular sequence.
+
+\section{Koszul complexes of length \(1\) and \(2\)}
+
+For any \(x\in R\), we can define a chain complex \(K(x)\) as follows:
+\[0\rightarrow R\xrightarrow{x}R\]
+The homology in the middle is denoted by \(H^0(K(x))\) (Note that here we view the complex as cochain complex and the index follows as cohomology) and given by the ideal quotient \((0:x)\). Given another element \(y\in R\), \(y\) gives a map between chain complexes:
+% https://q.uiver.app/#q=WzAsOCxbMSwwLCIwIl0sWzIsMCwiUiJdLFszLDAsIlIiXSxbMSwxLCIwIl0sWzIsMSwiUiJdLFswLDAsIksoeCk6Il0sWzAsMSwiSyh4KToiXSxbMywxLCJSIl0sWzAsMV0sWzEsMiwieCJdLFszLDRdLFs0LDcsIngiXSxbMSw0LCJ5IiwyXSxbMiw3LCJ5Il1d
+\[\begin{tikzcd}
+    {K(x):} & 0 & R & R \\
+    {K(x):} & 0 & R & R
+    \arrow[from=1-2, to=1-3]
+    \arrow["x", from=1-3, to=1-4]
+    \arrow["y"', from=1-3, to=2-3]
+    \arrow["y", from=1-4, to=2-4]
+    \arrow[from=2-2, to=2-3]
+    \arrow["x", from=2-3, to=2-4]
+  \end{tikzcd}\]
+We can form the mapping cone of this chain map and obtain a complex 
+\[K(x,y): 0\rightarrow R\xrightarrow{\begin{pmatrix}
+  y\\
+  x
+\end{pmatrix}}R\oplus R\xrightarrow{(-x,y)}R\rightarrow 0.\]
+
+This is different from the usual way Koszul complex is written 
+\[0\rightarrow R\xrightarrow{\begin{pmatrix}
+    y \\
+    -x
+  \end{pmatrix}}R\oplus R\xrightarrow{(x,y)}R\rightarrow 0.\]
+This version will be denoted as \(K'(\varphi)\) where \(\varphi:R^2\rightarrow R\) is given by \((x,y)\). The two versions are isomorphic as complexes. 
+
+The mapping cone \(K(x,y)\) can be fitted into a short exact sequence
+\[0\rightarrow K(x)[-1]\rightarrow K(x,y)\rightarrow K(x)\rightarrow 0\]
+and induces a long exact sequence in homology:
+\[\cdots\rightarrow H^0(K(x))\xrightarrow{\delta}H^0(K(x))\rightarrow H^1(K(x,y))\rightarrow H^1(K(x))\rightarrow \cdots\]
+where the connecting homomorphism \(\delta\) is induced by the chain map \(y:K(x)\rightarrow K(x)\). 
+
+Let us discuss the homology groups in more details. The group \(H^0(K(x))=(0:x)\) gives the annihilators of \(x\), and it is not hard to see that \(H^0(K(x,y))=(0:(x,y))\). If \(x\) is not a zerodivisor, then \(H^0(K(x,y))=0\).
+
+What about the homology group \(H^1(K(x,y))\)? An element \((a,b)\in \mathbb{R}^2\) is in the kernel if and only if \(-ax+by=0\) by definition. This implies that \(b\in (x:y)\). Conversely, if \(b\in (x:y)\), then there exists \(a\in R\) such that \(by=ax\), so \((a,b)\) is in the kernel. Assume that \(x\) is not a zero divisor in \(R\). In this case, the element \(a\) is uniquely determined by \(b\), and the association \(b\mapsto a\) is a module homomorphism. So the kernel is \((x:y)\). 
+
+On the other hand, the image is of the form \((cy,cx)\in R^2\), which is contained in the kernel. We know \(b=cx\) completely determines this element, so the element in the image, if viewed as subsets of \((x:y)\), must be from the ideal \((x)\). So the image is isomorphic to the ideal \((x)\), and we can write 
+\[H^1(K(x,y))=(x:y)/(x).\]
+In particular, under the assumption that \(x\) is not a zerodivisor, the condition \(H^1(K(x,y))=0\) is equivalent to the sequence \(x,y\) satisfies the 2nd condition in the definition of regular sequence when \(M=R\). Note that this does not necessarily mean \(x,y\) is a regular sequence, but in some cases, it is. 
+
+\begin{theorem}
+  If \(R\) is a Noetherian local ring and \(x,y\) are in the maximal ideal, then \(x,y\) is a regular sequence if and only if \(H^1(K(x,y))=0\). 
+\end{theorem}
+
+\begin{proof}
+    Assume \(H^1(K(x,y))=0\). From the long exact sequence, we know 
+    \[y: H^0(K(x))\rightarrow H^0(K(x))\]
+    is an isomorphism. This implies that 
+    \[yH^0(K(x))=H^0(K(x)).\]
+    Note that \(R\) is a Noetherian local ring and \(y\) is in the maximal ideal. By Nakayama's lemma, we have \(H^0(K(x))=0\). So \(x\) is not a zerodivisor. Both \(x,y\) are in the maximal ideal, so \((x,y)R\neq R\). This implies that \(x,y\) is a regular sequence. The converse has already been shown from the above discussion.
+\end{proof}
+
+\begin{remark}
+     From the presentation of \(K(x,y)\), it is not hard to see that \(K(x,y)\) is isomorphic to \(K(y,x)\). Under the hypothesis of the above theorem, \(x,y\) is a regular sequence if and only if \(y,x\) is a regular sequence. Note that in general, we cannot permute the order of elements in a regular sequence if the ring is not local. 
+\end{remark}
+
+\begin{corollary}
+  If \(R\) is a Noetherian local ring and \(x_1,\ldots,x_r\) is a regular sequence in the maximal ideal of \(R\), then any permutation of \(x_1,\ldots,x_r\) is again a regular sequence. 
+\end{corollary}
+
+\begin{example}
+  An example.
+\end{example}
+
+\section{Koszul Complex in General}
+Now we build the Koszul complex in general. Let \(N\) be an \(R\)-module, and \(\wedge N\) is the exterior algebra. 
+
+\begin{definition}[Koszul complex]
+     Given an \(R\)-module \(N\) and \(x\in N\), we define the Koszul complex to be the complex
+     \[K(x):0\rightarrow R\rightarrow N\rightarrow \wedge^2 N\rightarrow \cdots \rightarrow \wedge^i N\xrightarrow{d_x}\wedge^{i+1}N\rightarrow \cdots\]
+     where the differential \(d_x\) sends an element \(a\) to \(x\wedge a\). In particular, \(d_x(1)=x\in N\). If \(N\cong R^n\) is a free module of rank \(n\), we can write 
+     \[x=(x_1,\ldots,x_n)\in R^n\cong N.\]
+     In this case, we write \(K(x_1,\ldots,x_n)\) instead of \(K(x)\).
+\end{definition}
+
+The functoriality of the Koszul complex is obvious from the functoriality of the exterior algebra. Suppose \(f:N\rightarrow M\) is a map of \(R\)-modules satisfying \(f(x)=y\), then the map 
+\[\wedge f:\wedge N\rightarrow \wedge M\]
+preserves the differential and thus can be viewed as a map of complexes.
+
+\begin{proposition}
+     Let \(N\) be a free module of rank \(n\). We have 
+     \[H^n(K(x_1,\ldots,x_n))=R/(x_1,\ldots,x_n).\]
+\end{proposition}
+
+\begin{proof}
+    Consider the right hand side of the Koszul complex 
+    \[\cdots\rightarrow \wedge^{n-1} N\rightarrow \wedge^n N\rightarrow 0.\]
+    Let \(e_1,\ldots,e_n\) be a basis of \(N\cong R^n\). Then \(\wedge^n\cong R\) has rank \(1\) and is generated by \(e_1\wedge \cdots \wedge e_n\). And \(\wedge^{n-1} N\) has a basis 
+    \[e_1\wedge \cdots \wedge \hat{e}_i\wedge \cdots \wedge e_n,\ \ \ 1\leq i\leq n.\]
+    So \(\wedge^{n-1}N\) is isomorphic to \(R^n\). We know that 
+    \[x=(x_1,\ldots,x_n)=\sum_{i=1}^{n}x_ie_i.\]
+    By definition, the differential \(d_x\) sends \(e_1\wedge \cdots \wedge \hat{e}_i\wedge \cdots \wedge e_n\) to 
+    \[(\sum_{i=1}^{n}x_ie_i)\wedge e_1\wedge \cdots \wedge \hat{e}_i\wedge \cdots \wedge e_n=\pm x_ie_1\wedge \cdots \wedge e_n.\]
+    So the image of \(d_x\) is the ideal \((x_1,\ldots,x_n)\) and the homology group 
+    \[H^n(K(x_1,\ldots,x_n))=R/(x_1,\ldots,x_n).\]
+\end{proof}
+
+Think about our discussion on the Koszul complex of length 2, it is reasonable to expect the homology of the Koszul complex has something to do with the regular sequences. In general, it does not detect whether \(x_1,\ldots,x_n\) is a regular sequence, but somehow it detects the lengths of the maximal regular sequence in the ideal \((x_1,\ldots,x_n)\).
+
+\begin{theorem}\label{regseqlgth}
+  Let \(M\) be a finitely generated module over \(R\). If 
+  \[H^i(M\otimes K(x_1,\ldots,x_n))=0\]
+  for all \(j<r\) and 
+  \[H^r(M\otimes K(x_1,\ldots,x_n))\neq 0,\]
+  then every maximal \(M\)-sequence in \(I=(x_1,\ldots,x_n)\subset R\) has length \(r\).  
+\end{theorem}
+
+\begin{proof}
+    Later.
+\end{proof}
+
+\begin{corollary}
+  If \(x_1,\ldots,x_n\) is an \(M\)-sequence, then \(M\otimes K(x_1,\ldots,x_n)\) is exact except at the extreme right,i.e.
+  \begin{align*}
+       &H^j(M\otimes K(x_1,\ldots,x_n))=0,\ \ \ j<n,\\
+       &H^n(M\otimes K(x_1,\ldots,x_n))=M/(x_1,\ldots,x_n)M.
+  \end{align*}
+\end{corollary}
+
+\begin{proof}
+    \(K(x_1,\ldots,x_n)\) is a chain complex of free modules, tensoring with it is exact.
+\end{proof}
+
+The converse of the theorem \ref{regseqlgth} is not true in general, but it does hold if \(R\) is a local ring. A more general version will be given later. Recall that \(I=(x_1,\ldots,x_n)\subset R\) is an ideal in \(M\). Assume 
+\[H^n(M\otimes K(x_1,\ldots,x_n))=M/IM\neq 0.\]
+In this case, the length \(r\) from the above theorem is positive, and the length if all maximal \(M\)-sequence is the same.
+
+\begin{definition}[Depth]
+     Let \(R\) be a Noetherian ring, \(I\subset R\) be an ideal and \(M\) be an \(R\)-module. If \(IM\neq M\), we define the depth of \(I\) on \(M\), written \(\dep(I,M)\), to be the length of any maximal \(M\)-sequence in I. If \(M=R\), we shall simply speak of the depth of I. If \(IM=M\), we adopt the convention that \(\dep(I,M)=\infty\). 
+\end{definition}
+
+In the local case, the theorem \ref{regseqlgth} can be strengthened.
+
+\begin{theorem}
+  Let \((R,\mathfrak{m})\) be a Noetherian local ring and \(M\) be an \(R\)-module. Suppose \(x_1,\ldots,x_n\in \mathfrak{m}\). If for some \(k\), 
+  \[H^k(M\otimes K(x_1,\ldots,x_n))=0,\]
+  then 
+  \[H^j(M\otimes K(x_1,\ldots,x_n))=0\]
+  for all \(j\leq k\). In particular, if \(H^{n-1}(M\otimes K(x_1,\ldots,x_n))=0\), then \(x_1,\ldots,x_n\) is an \(M\)-sequence. 
+\end{theorem}
+
+\begin{proof}
+    Later.
+\end{proof}
+
+The depth of an ideal \(I\) is a kind of arithmetic measure of the size of \(I\), while the codimension of \(I\) is a geometric measure. Like the codimension, the depth depends only on the radical of \(I\). The theorem \ref{regseqlgth} implies that an ideal with \(r\) generators can have depth at most \(r\). We shall see in general that 
+\[\dep I\leq \codim I.\]
+
+\begin{corollary}[Geometric nature of depth]\label{depgeo}
+     \begin{enumerate}[(a)]
+       \item If \(x_1,\ldots,x_r\) is an \(M\)-sequence, then the sequence \(x_1^t,\ldots, x_r^t\) is an \(M\)-sequence for any positive integer \(t\). 
+       \item If \(I\) is an ideal of \(R\) and \(J=\sqrt{I}\) is its radical, we have 
+       \[\dep (I,M)=\dep (J,M).\]
+     \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    \begin{enumerate}[(a)]
+    \item We do an induction on \(r\) to reduce to the local case. For \(r=1\), we know that a power of nonzero divisor is still a nonzero divisor. For \(r\geq 2\), assume that \(x_1^t,\ldots,x_{r-1}^t\) is an \(M\)-sequence for any positive integer \(t\). We need to show that \(x_r\) is a nonzero divisor on \(M/(x_1^t,\ldots,x_{r-1}^t)M\). We know that \(x_1,\ldots,x_r\) is an \(M\)-sequence, so there exists a maximal ideal \(\mathfrak{m}\) such that \((x_1,\ldots,x_r)\subset \mathfrak{m}\). Localizing at \(\mathfrak{m}\) does not change if \(x_r\) is a nonzero divisor on \(M/(x_1^t,\ldots,x_{r-1}^t)M\), so we may assume \(R\) is a local ring and \(x_1,\ldots,x_r\) are contained in the maximal ideal.
+
+    If \(x_1,\ldots,x_r\) is an \(M\)-sequence, then \(x_1,\ldots,x_{r-1},{x_r}^t\) is also an \(M\)-sequence. In a local ring \(R\), we can permute the order of elements for any regular sequence. So \(x_r^t,x_1,\ldots,x_{r-1}\) is also an \(M\)-sequence. Repeating the argument, and we obtain that \({x_1}^t,{x_2}^t,\ldots,x_r^t\) is an \(M\)-sequence. 
+    \item Since \(I\subset J\), we have \(\dep (I,M)\leq \dep (J,M)\). Conversely, if \(x_1,\ldots,x_r\) is an \(M\)-sequence in \(J\), then for large enough \(t\), we know that \(x_1^t,\ldots,x_r^t\) is also an \(M\)-sequence and \(x_1^t,\ldots,{x_r}^t\) are in \(I\), so \(\dep (J,M)\leq \dep (I,M)\).
+    \end{enumerate}
+\end{proof}
+
+\section{Building Koszul complex from parts}
+We briefly describe the tensor product of two complexes and use it to prove Theorem \ref{regseqlgth}. 
+
+\begin{proposition}
+     If \(N=N'\oplus N''\), then \(\wedge N=\wedge N'\oplus\wedge N''\) as skew-commutative algebra. If \(x'\in N'\) and \(x''\in N''\), then let \(x=(x',x'')\in N\), we have 
+     \[K(x)=K(x')\otimes K(x'')\]
+     as complexes.
+\end{proposition}
+
+\begin{proof}
+    Algebra. Omitted.
+\end{proof}
+
+\begin{corollary}
+  Let \(y_1,\ldots,y_r\) be elements of the ideal generated by \(x_1,\ldots,x_n\in R\), and \(M\) be any \(R\)-module. Then 
+  \[H^*(M\otimes K(x_1,\ldots,x_n,y_1,\ldots,y_r))\cong H^*(M\otimes K(x_1,\ldots,x_n))\otimes \wedge R^r.\]
+  as graded modules. In particular, for each \(i\), we have 
+  \[H^i(M\otimes K(x_1,\ldots,x_n,y_1,\ldots,y_r))\cong \sum_{i=j+k}H^k(M\otimes K(x_1,\ldots,x_n))\otimes \wedge^j R^r.\]
+  Thus,
+  \[H^i(M\otimes K(x_1,\ldots,x_n,y_1,\ldots,y_r))=0\]
+  iff 
+  \[H^k(M\otimes K(x_1,\ldots,x_n))=0\]
+  for all \(k\) with \(i-r\leq k\leq i\).
+\end{corollary}
+
+
+
+\section{Duality and Homotopy}
+
+Recall that the Koszul complex is defined via an element \(x\in R\), which can be viewed as a map \(x:R\rightarrow N\) for an \(R\)-module \(N\). We can define a dual version 
+
