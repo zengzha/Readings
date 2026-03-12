@@ -25,7 +25,7 @@ There is a lemma for the depth similar to the princiapl ideal theorem of codimen
 
 \section{Depth and the Vanishing of Ext}
 
-\begin{proposition} 
+\begin{proposition} \label{depext}
      Let \(R\) be a ring and \(M,N\) be finitely generated \(R\)-modules. If \(\ann M+\ann N=R\), then \(\ext_R^r(M,N)=0\) for every \(r\). Otherwise, \(\dep(\ann M,N)\) is the smallest number \(r\) such that \(\ext_R^r(M,N)\neq 0\).
 \end{proposition}
 
@@ -155,9 +155,9 @@ In the next part, we discuss some nice properties and applications for CM rings.
 \end{corollary}
 
 \begin{proof}
-    By \ref{CMpoly}, we know that the polynomial ring over a CM ring is still CM. Let \(R\) be a CM ring. To prove any finitely generated \(R\)-algebra is CM, it is thus suffice to prove that any holomorphic image \(S\) of \(R\) is catenary. Any two maximal chains of prime ideals in \(S\) can be pulled back to two maximal chains of prime ideals \(\mathfrak{p}\subset \mathfrak{q}\) in \(R\), and by \ref{CMlocal}, we may localize \(R\) at the prime ideal \(\mathfrak{q}\) without changing the chains. So we may assume \(R\) is a local CM ring, and the first statement follows from the second. 
+    By \ref{CMpoly}, we know that the polynomial ring over a CM ring is still CM. Let \(R\) be a CM ring. To prove any finitely generated \(R\)-algebra is catenary, it is thus suffice to prove that any holomorphic image \(S\) of \(R\) is catenary. Any two maximal chains of prime ideals in \(S\) can be pulled back to two maximal chains of prime ideals \(\mathfrak{p}\subset \mathfrak{q}\) in \(R\), and by \ref{CMlocal}, we may localize \(R\) at the prime ideal \(\mathfrak{q}\) without changing the chains. So we may assume \(R\) is a local CM ring, and the first statement follows from the second. 
 
-   second
+   Let \((R,\mathfrak{m})\) be a CM local ring. It is suffice to show that all maximal chains from \(\mathfrak{m}\) to an associated prime of \(R\) have the same length, namely \(\dim R\). We have seen that the length of such chains \(\geq \dep \mathfrak{m}\), and note that \(\dim R=\dep \mathfrak{m}\) in \(R\). We are done. 
 \end{proof}
 
 \begin{definition}[Equidimensional]
@@ -170,16 +170,63 @@ For a CM ring \(R\), the second condition in the definition follows from the fir
   Any local CM ring is equidimensional.
 \end{corollary}
 
-Geometrically speaking, if a variety \(X\) is locally CM at a point \(p\) (in the sense that the local ring \(\mathcal{O}_{X,p}\) is CM), then \(p\) cannot lie on two components of different dimensions. For example, the ring \(\mathbb{C}[x,y,z]/(xy,yz)\) is not CM at the origin. We can get a lot of information about an ideal \(I\) if we know the ring \(R/I\) is CM.
+Geometrically speaking, if a variety \(X\) is locally CM at a point \(p\) (in the sense that the local ring \(\mathcal{O}_{X,p}\) is CM), then \(p\) cannot lie on two components of different dimensions. For example, the ring \(\mathbb{C}[x,y,z]/(xy,yz)\) is not CM at the origin. Another observation is at a CM point (the local ring is CM), a vartiety must be locally "connected in codimension 1" in the sense that removing a subvariety of codimension 2 or larger cannot disconnect it (or even its completion). The algebraic version is as follows:
+
+\begin{theorem}[Hartshorne's Connectedness theorem]
+  Let \(R\) be a local ring and \(I, J\) be proper ideals of \(R\). The radicals \(\sqrt{I}\) and \(\sqrt{J}\) are incomparable. If \(I\cap J\) is nilpotent, then \(\dep (I+J)\leq 1\). In particular, if \(R\) is CM, or even satisfies Serre's condition S2, then \(\codim (I+J)\leq 1\).
+\end{theorem}
+
+\begin{proof}
+    \(IJ\subset I\cap J\) is nilpotent. Since taking radicals does not change the depth of an ideal, we may replace \(I\) and \(J\) with \(I^N\) and \(J^N\) for large enough \(N\) such that \((IJ)^N=0\). Thus, we may assume \((I\cap J)(I+J)=0\). If \(I\cap J\neq 0\), then \(I+J\) consists of zerodivisors and has depth \(0\). 
+
+    Now suppose \(I\cap J=0\). Consider the short exact sequence
+    \[0\rightarrow R\xrightarrow{f} R/I\oplus R/J\xrightarrow{g} R/(I+J)\rightarrow 0\]
+    where \(R\cong R/(I\cap J)\), \(f(1)=(1,-1)\in R/I\oplus R/J\) and \(g(a,b)=a+b\). Assume the opposite that \(\dep (I+J)> 1\), then by Proposition \ref{depext}, \(\ext^1_R(R/(I+J),R)=0\), so the sequence splits. This implies we have a map \(\varphi:R/(I+J)\rightarrow R/I\oplus R/J\) such that \(g\circ \varphi=id\). Let \(\varphi(1)=(a,b)\in R^2\). We know that \(a+b\equiv 1\) mod \(I+J\), and \(R(a,b)\cap \ker g=0\) in \(R/I\oplus R/J\). This implies that \(R(a,b)\cap R(1,-1)=0\) in \(R/I\oplus R/J\). 
+
+    Note that \(R/(I+J)\) is still a local ring and as \(a+b\equiv 1\) in \(R/(I+J)\), we know that either \(a\) or \(b\) is a unit. Suppose \(a\) is a unit. Then 
+    \[J(a,b)=(Ja,0)=(J,0)=J(1,-1).\]
+    This implies \(J(a,b)=(J,0)=0\) in \(R/I\oplus R/J\). So \(J\subset I\). It follows that \(\sqrt{J}\subset \sqrt{I}\), but \(\sqrt{J}\) and \(\sqrt{I}\) are incomparable. A contradiction. Hence, \(\dep (I+J)\leq 1\). 
+\end{proof}
+
+We can get a lot of information about an ideal \(I\) if we know the ring \(R/I\) is CM.
 
 \begin{proposition}
      Let \(R\) be a CM ring. If \(I=(x_1,\ldots,x_n)\) is an ideal generated by \(n\) elements in a CM ring \(R\) such that \(\codim I=n\), the largest possible value, then \(R/I\) is a CM ring. 
 \end{proposition}
 
 \begin{proof}
-    
+    We can check CM at every maximal ideal \(\mathfrak{m}\). We may assume \((R,\mathfrak{m})\) is local. Since \(R\) is CM and \(I=(x_1,\ldots,x_n)\) has codimension \(n\), we know that \(x_1,\ldots,x_n\) is a regular sequence in \(I\). Thus, \(\dep R/I=\dep R-n\). On the other hand, for any \(1\leq i\leq n\), \(x_i\) is not in any of the minimal primes of \((x_1,\ldots,x_{i-1})\) as \(x_i\) is a nonzerodivisor of \(R/(x_1,\ldots,x_{i-1})\). So \(\dim R/I\leq \dim R-n\). Hence, 
+    \[\dim R/I\leq \dim R-n=\dep R-n=\dep R/I.\]
+    The other direction is obvious. 
 \end{proof}
 
 \begin{corollary}[Unmixedness Theorem]
   Let \(R\) be a ring. If \(I=(x_1,\ldots,x_n)\) is an ideal generated by \(n\) elements such that \(\codim I=n\), then all minimal primes of \(I\) have codimension \(n\). If \(R\) is CM, then every associated prime of \(I\) is minimal over \(I\). 
 \end{corollary}
+
+\begin{proof}
+    Let \(\mathfrak{p}\) be a minimal primes of \(I\). By definition, \(\codim I\) is the minimum of the codimension of minimal primes of \(I\), so \(\codim \mathfrak{p}\geq n\). On the other hand, by the Krull's height theorem, \(\codim \mathfrak{p}\geq n\). So \(\codim \mathfrak{p}=n\). If \(R\) is CM, we know that all associated primes of \(I\) is minimal. 
+\end{proof}
+
+\section{Flatness and Depth}  
+
+Noetherian normalization allows us to write any affine algebra as a finitely generated module over a polynomial ring of the same dimension, and every complete local ring may be written as a finitely generated module over a regular local ring of the same dimension. We will see that if an \(R\)-algebra is CM, then the flatness implies that the dimension can be computed in the most intuitive way. 
+
+\begin{theorem}[miracle flatness]
+  Let \((R,\mathfrak{m})\) be a regular local ring and \((A,\mathfrak{n})\) be a local Noetherian \(R\)-algebra with \(\mathfrak{m}A\subset \mathfrak{n}\) (The structure map \(R\rightarrow A\) is a local ring map). Then we have the following:
+  \begin{enumerate}[(1)]
+    \item \(A\) is flat over \(R\) iff \(\dep (\mathfrak{m}A,A)=\dim R\).
+    \item If \(A\) is CM, then \(A\) is flat over \(R\) iff 
+    \[\dim A=\dim R+\dim A/\mathfrak{m}A.\]
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let \(\dim R=d\). We know that \(R\) is a regular local ring, so there exists a regular sequence \(x_1,\ldots,x_d\) in \(R\) such that \(\mathfrak{m}=(x_1,\ldots,x_d)\). Let \(K=K(x_1,\ldots,x_d)\) be the corresponding Koszul complex, \(K\) is exact except for \(H^d(K)=R/\mathfrak{m}\neq 0\). Since \(A\) is flat, we obtain that 
+    \[H^i(K\otimes_R A)=\begin{cases}
+      0,&\iif i\neq d,\\
+      A\otimes_R R/\mathfrak{m},&\iif i=d.
+    \end{cases}\] 
+    Note that \(K\otimes_R A\) is the Koszul complex 
+\end{proof}
+
