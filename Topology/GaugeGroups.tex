@@ -1,0 +1,195 @@
+\chapter{Gauge Groups}
+
+\section{Principal \(G\)-Bundles and classifying spaces}
+
+Let \(G\) be a topological group. In this section, we review some basic facts about principal \(G\)-bundles for the later sections. Most of these come from \cite{husemollerFibreBundles1994}.
+
+\begin{definition}[Principal \(G\)-bundle]
+    A principal \(G\)-bundle is a fibre bundle \(\pi:P\rightarrow X\). The total space \(P\) has a free and transitive \(G\)-action which preserves fibers. Locally on some open set \(U\subset X\), it is given by 
+    \[\pi|_U:P|_U\cong U\times G\rightarrow U\] 
+    and the action is 
+    \begin{align*}
+         P|_U\times G&\rightarrow U,\\
+         (x,g)\cdot h&\mapsto (x,gh).
+    \end{align*}
+\end{definition}
+
+\begin{remark}
+     The fiber of a principal \(G\)-bundle is isomorphic to \(G\) as \(G\)-torsors and we have a homeomorphism \(P/G\cong X\). 
+\end{remark}
+
+A morphism of principal \(G\)-bundles \(f:P_1\rightarrow P_2\) is one that respects the \(G\)-action on \(P_1\) and \(P_2\). Namely, \(f(p)\cdot g=f(p\cdot g)\) for any \(p\in P_1\) and \(g\in G\). Now given a left \(G\)-space \(F\), we have a canonical way to associated an \(F\)-bundle with \(\pi: P\rightarrow X\). Consider the following space 
+\[P\times_G F=P\times F/\sim, (p\cdot g,a)\sim (p,g^{-1}\cdot a)\]
+Let \(\pi_F\) be the composition \(P\times_G F\rightarrow P\xrightarrow{\pi} X\). It is not very hard to see that \(\pi_F:P\times_G F\rightarrow X\) is a fibre bundle with fiber \(F\). Note that \(G\) is the structure group of this fibre bundle. 
+
+\begin{proposition}
+     Every morphism of principal \(G\)-bundles is an isomorphism.
+\end{proposition}
+\begin{proof}
+    The bijection relies on the fact that the \(G\)-acction is free and transitive on each fiber. 
+\end{proof}
+
+\begin{example}
+    Let \(G\) be a Lie group and consider the conjugate action on \(G\) given by 
+    \begin{align*}
+         G\times G&\rightarrow G,\\
+         (g,h)&\mapsto g\cdot h=ghg^{-1}.
+    \end{align*}
+    For any principal \(G\)-bundle \(\pi:P\rightarrow X\), write \(\Ad(G)\) as the associated bundle \(P\times_G G\rightarrow X\) where \(G\) viewed as a left \(G\)-space via the conjugate action. More specifically, we have 
+    \[(pg,h)\sim (p,g^{-1}hg)\]
+    for any \(p\in P\) and \(g,h\in G\). 
+
+    For any \(g\in G\), we have a group homomorphism 
+    \[\Phi_g:G\rightarrow \Aut(G)\]
+    given by sending \(g\) to the automorphism \(h\mapsto ghg^{-1}\). Let \(\mathfrak{g}\) be the Lie algebra, namely the tangent space of \(G\) at the identity. The differential for the conjugate \(h\mapsto ghg^{-1}\) is a Lie algebra automorphism. Thus we obtain a map \(G\rightarrow \Aut(\mathfrak{g})\). In other words, the vector space \(\mathfrak{g}\) can be viewed as a left \(G\)-space. Given a principal \(G\)-bundle \(P\rightarrow X\), we write \(\ad(G)\) as the associated \(\mathfrak{g}\)-bundle \(P\times_G \mathfrak{g}\rightarrow X\).
+\end{example}
+
+The following proposition gives a description for the global sections of the associated \(F\)-bundles.
+
+\begin{proposition}[Global sections of associated bundles]
+     Let \(\pi:P\rightarrow X\) be a principal \(G\)-bundle and \(F\) be a left \(G\)-space. Write \(\pi_F:P\times_G F\rightarrow X\) as the associated \(F\)-bundle. The global sections of \(\pi_F\) is in bijection with maps \(\phi:P\rightarrow F\) satisfying 
+     \[\phi(x\cdot g)=g^{-1}\cdot \phi(x)\]
+     for any \(x\in P\) and \(g\in G\).
+\end{proposition}
+
+\begin{proof}
+    Given a global section \(s:X\rightarrow P\times_G F\). For any \(x\in X\), we can write \(s(x)=(p,a)\). Define \(\phi(pg)=a\) for any \(g\in G\). Conversely, given \(\phi:P\rightarrow X\), we could define a global section 
+    \begin{align*}
+         s:X&\rightarrow P\times_G F,\\
+         x&\mapsto (\pi^{-1}(x),\phi(\pi^{-1}(x))).
+    \end{align*}
+    It is not hard to check that these maps are well-defined and continuous. 
+\end{proof}
+
+For convenience, from now on we will assume that the base space \(X\) has a numerable covering such that the principal \(G\)-bundles are locally trivial over this numerable coverings. This works for a lot of spaces \(X\), for example, all manifolds and all CW complexes. The goal of this section is to explain what is the universal bundle \(EG\rightarrow BG\) for a topological group \(G\). The key ideal is that given a space \(X\) and a topological group \(G\) (or even just a \(H\)-space, like Eilenberg-Maclane spaces), we have a bijection
+\[
+     [X, BG]_h \xrightarrow{\sim}
+     \left\{ \text{isomorphism classes of principal $G$-bundles over $X$} \right\}.
+\]
+where \([X,BG]_h\) are maps up to homotopy. And the principal \(G\)-bundle \(EG\rightarrow BG\) is called the universal \(G\)-bundle. In other words, the space \(BG\) is called the classifying space of \(G\) and the following functor 
+\[\mathrm{Bun}_G: \mathrm{Ho}(\mathrm{CW})\rightarrow \mathrm{Sets}\]
+sending a CW complex \(X\) to the sets of isomorphism classes of principal \(G\)-bundles over \(X\) is represented by \(BG\) in the homotopy category. By the universal property, we see that \(BG\) is unique up to homotopy equivalence. One way to check if a principal \(G\)-bundle is the following:
+
+\begin{proposition}
+     A principal \(G\)-bundle \(P\rightarrow X\) is the universal \(G\)-bundle if and only if \(P\) is contractible as a space.
+\end{proposition}
+
+\begin{proof}
+    The proof requires to explicitly construct a \(G\)-space \(EG\) via Milnor construction and show it is universal and contractible. All other principal \(G\)-bundles with contractible total space can be shown is isomorphic to \(EG\rightarrow BG\) as \(G\)-bundles.
+\end{proof}
+
+Note that we are working in the category of CW complexes. By Whitehead theorem, it is enough to check all homotopy groups of \(EG\) vanishes. Note that \(EG\) being contractible does not mean that the homotopy equivalence to a point is \(G\)-equivariant. 
+
+\begin{remark}
+     Consider the path fibration 
+     \[\Omega BG\rightarrow PBG\rightarrow BG\]
+     The loop space \(\Omega BG\) is a group object (inverse and associativity is up to homotopy) and it acts on \(PBG\). So this is principal \(G\)-bundle with contractible total space. We have a fiberwise homotopy equivalence \(EG\rightarrow P\), so \(\Omega BG\) is homotopy equivalent to \(G\) as a group object and from the long exact sequence in homotopy groups, we get \(\pi_n(BG)\cong \pi_{n-1}(G)\) for all \(n\).
+\end{remark}
+
+\begin{example}
+    There is one specific case. Consider the Eilenberg-Maclane space \(K(G,n)\). It is not strictly a group but has a group structure up to homotopy. We define \(BK(G,n)=K(G,n+1)\). And the fibration is given by 
+    \[\Omega K(G,n+1)\simeq K(G,n)\rightarrow PK(G,n+1)\rightarrow BK(G,n).\]
+\end{example}
+
+We will mainly focus on the case \(G=U(n)\) or \(G\) is a compact Lie group. Every compact Lie group can be embedded as a closed subgroup of \(U(n)\) for some \(n\). If we find a model for \(BU(n)\), then we can obtain \(BG\) by considering the restricted group action on the total space. 
+
+\begin{example}
+    In this example, we describe \(BU(n)\). Recall that the Stiefel manifold \(V_n(\mathbb{C}^{n+k})\) is the collection of all orthonormal \(n\)-frames in \(\mathbb{C}^{n+k}\). It admits a natural \(U(n)\)-action and the orbit space is the Grassmannian \(G_n(\mathbb{C}^{n+k})\). Namely, we have a fiber sequence 
+    \[U(n)\rightarrow V_n(\mathbb{C}^{n+k})\rightarrow G_n(\mathbb{C}^{n+k}) \]
+    Passing to the direct limit for \(k\), we get a principal \(U(n)\)-bundle
+    \[U(n)\rightarrow V_n(\mathbb{C}^\infty)\rightarrow G_n(\mathbb{C}^\infty)\]
+    To see that \(V_n(\mathbb{C}^\infty)\) is contractible. We need to use that \(\pi_i(V_n(\mathbb{C}^{n+k}))=0\) for \(i\leq 2k\). This comes from the following fibration
+    \[U(n)\rightarrow U(n+k)\rightarrow V_k(\mathbb{C}^{n+k}).\]
+    This implies that \(BU(n)\simeq G_n(\mathbb{C}^\infty)\). In particular, when \(n=1\), the universal bundle is given by 
+    \[S^1\rightarrow S^\infty\rightarrow \mathbb{C}P^\infty.\]
+    And it implies that \(BU(1)\simeq K(\mathbb{Z},2)\). There is a way to describe \(BU(n)\) for \(n\geq 2\) using Eilenberg-Maclane spaces via rational homotopy theory.
+\end{example}
+
+\section{Topology of Gauge groups}
+
+The purpose of this section is to describe the topology of the classifying space of some gauge groups. We are working over a compact Riemann surface \(M\). All maps and objects are assumed to be smooth, i.e. of class \(C^\infty\). It is proved that continuous maps between compact manifolds are homotopic to smooth ones. So the computation also works in a more general case. 
+
+We first define what is the gauge group related to a principal bundle. Let \(G\) be a compact Lie group (in mosts cases, \(G\) is the unitary group \(U(n)\)) and \(\pi:P\rightarrow M\) is a princiapl \(G\)-bundle over \(M\). Consider the conjugate representation \(G\rightarrow \Aut(G)\) given by \(g\mapsto (h\mapsto ghg^{-1})\). This makes \(G\) into a left \(G\)-space. We can form an assoicaited bundle \(\Ad G\)
+\[\Ad G:P\times_G G\rightarrow M.\]
+where each fiber can be identified with the group \(G\). From the previous discussion, we know that the sections of \(\Ad G\) can be identified with the space of \(G\)-equivariant maps \(f:P\rightarrow G\), namely 
+\[f(pg)=g^{-1}f(p)g.\]
+We write it in this way:
+\[\Gamma(\Ad G)\cong \Map_G(M,G).\]
+\begin{definition}[Gauge group]
+     Given a principal \(G\)-bundle \(P\rightarrow M\), the \textit{gauge group} \(\mathcal{G}(P)\) is defined as the sapce of \(G\)-equivariant maps \(f:P\rightarrow G\) where the group operation is given by pointwise multiplication. 
+\end{definition}
+
+\begin{remark}
+     We have already seen that \(\mathcal{G}(P)\) can be identified with the space of sections \(\Gamma(\Ad G)\). Moreover, it can also be identified with the group of automorphisms of principal \(G\)-bundles:
+     \[\mathcal{G}(P)\simeq \Aut_M(P).\]
+     We will use these three equivalent description of gauge group \(\mathcal{G}(P)\) interchangeably.
+\end{remark}
+
+\begin{example}[Trivial Bundle]
+    Let \(P\rightarrow M\) be a principal \(G\)-bundle. If \(P\) is trivial, namely \(P\cong M\times G\), or if \(G\) is abelian, then the gauge group \(\mathcal{G}(P)\) is homeomorphic to \(\Map(M,G)\). Indeed, when \(P\) is trivial, the gauge group \(\mathcal{G}(P)=\Map_G(M\times G, G)\) consists of maps \(f:M\times G\rightarrow G\) such that \(f(x,hg)=f((a,h)\cdot g)=g^{-1}f(x,h)g\) for all \(x\in M\) and \(g,h\in G\). So the map \(f\) is completely determined by \(f(x,1)\) as \(f(x,g)=g^{-1}f(x,1)g\). When \(G\) is abelian, the action of \(G\) on \(G\) is trivial, so \(f(ag)=f(a)\) for all \(a\in P\) and \(g\in G\), so \(f\) descends to map from the orbit space \(M\).  
+\end{example}
+
+Next, we give a description of the classifying space \(B \mathcal{G}(P)\):
+
+\begin{proposition}
+     Let \(BG\) be the classifying space of \(G\). Assume \(BG\) is paracompact and locally trivial (This works for all compact Lie groups). We have a homotopy equivalence 
+     \[B \mathcal{G}(P)\simeq \Map_P(M,BG)\]
+     where \(\Map_P(M,BG)\) denotes all continuous maps \(M\rightarrow BG\) such that the pullback bundle over \(M\) is isomorphic to \(P\). In particular, it is the connected component of the classifying maps \(M\rightarrow BG\) related to \(P\), up to homotopy.
+\end{proposition}
+\begin{proof}
+    Let \(G\rightarrow EG\rightarrow BG\) be the universal \(G\)-bundle. \(\Map_G(P,EG)\) is the space of \(G\)-equivariant maps. Given a \(G\)-equivariant map \(f:P\rightarrow EG\), it automatically descends to a map \(\tilde{f}:M\rightarrow BG\) and we have a commutative square 
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJQIl0sWzEsMCwiRUciXSxbMCwxLCJNIl0sWzEsMSwiQkciXSxbMiwzLCJcXHRpbGRle2Z9IiwyXSxbMCwxLCJmIl0sWzAsMl0sWzEsM11d
+    \[\begin{tikzcd}
+              P & EG \\
+              M & BG
+              \arrow["f", from=1-1, to=1-2]
+              \arrow[from=1-1, to=2-1]
+              \arrow[from=1-2, to=2-2]
+              \arrow["{\tilde{f}}"', from=2-1, to=2-2]
+         \end{tikzcd}\]
+     Note that \(\tilde{f}^*(EG)\cong P\) since \(EG\rightarrow BG\) is the universal \(G\)-bundle. This gives a well-defined morphism 
+     \[\Map_G(P,EG)\rightarrow \Map_P(M,BG).\]
+     Moreover, the space \(\Map_G(P,EG)\) has a natural action of \(\mathcal{G}(P)=\Aut_M(P)\) by precomposition. It is not hard to check the action is free and transitive on the fiber (this relies on the fact that all morphisms of principal \(G\)-bundles are isomorphisms). So we get a principal fibration
+     \[\Aut_M(P)\rightarrow \Map_G(P,EG)\rightarrow \Map_P(M,BG).\]
+     Next, we want to show that the space \(\Map_G(P,EG)\) is contractible. Note that this cannot be directly obtained from the fact that \(EG\) is contractible since the homotopy equivalence between \(EG\) and \(\left\{ * \right\}\) in general is not \(G\)-equivariant. Consider the associated bundle \(P\times_G EG\rightarrow M\). The space of sections of this bundle is homeomorphic to \(\Map_G(M,EG)\). So we only need to show that all sections of the bundle \(P\times_G EG\rightarrow M\) are homotopic. Note that \(M\) is a Riemann surface (thus a CW-complex) and the fiber is contractible, so we can use the CW filtration to get a homotopy between different sections. This 
+     proves that \(\Map_G(P,EG)\) is contractible. Moreover, note that in this fibration, all spaces are CW complexes, thus this is a Hurewicz fibration. And we can conclude that this is the universal \(\mathcal{G}(P)\)-bundle.
+
+
+\end{proof}
+
+Now first we disucuss the case \(G=U(1)\simeq S^1\). The universal \(U(1)\)-bundle is given by 
+\[U(1)\simeq S^1\rightarrow S^\infty\rightarrow \mathbb{C}\mathbb{P}^\infty.\]
+It is easy to compute that the only nonvanishing homotopy group is \(\pi_2(\mathbb{C}\mathbb{P}^\infty)=\mathbb{Z}\). So \(BU(1)\simeq K(\mathbb{Z},2)\) up to homotopy. Thus we need to study maps from a Riemann surface \(M\) to Eilenberg-Maclane spaces.
+
+\begin{theorem}
+     Let \(G\) be an abelian group and \(X\) be a CW complex. Then 
+     \[\Map(X,K(G,n))\simeq \prod_q K(H^{n-q}(X;G),q).\]
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+Let \(M\) be a Riemann surface of genus \(g\), we have 
+\begin{align*}
+     H^0(M;\mathbb{Z})&=\mathbb{Z},\\
+     H^1(M;\mathbb{Z})&=\oplus_{2g} \mathbb{Z},\\
+     H^2(M;\mathbb{Z})&=\mathbb{Z}.
+\end{align*}
+
+So the mapping space \(\Map(M,BU(1))\) is homotopy equivalent to \(\mathbb{Z}\times (S^1)^{2g}\times \mathbb{C}\mathbb{P}^\infty\).
+
+
+
+
+\section{Holomorphic structure and Dolbeault operators}
+
+Let \(X\) be a Riemann surface and \(E\) be a complex vector bundle over \(X\). We have the following equivalence:
+\begin{itemize}
+     \item \(E\) is a holomorphic vector bundle.
+     \item There exists a \(\mathbb{C}\)-linear operator 
+     \[\bar{\partial}_E:\Omega^{0,0}(X,E)\rightarrow \Omega^{0,1}(X,E)\]
+     satisfying the Leibniz rule and \({\bar{\partial}_E}^2=0\).
+\end{itemize}
+
+This can be proved by applying the Newlander-Nirenberg integrability theorem for complex structures. A more elementary proof is available in \cite{atiyahYangMillsEquationsRiemann1983}{Section 5}, 

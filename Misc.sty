@@ -1,5 +1,6 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{stmaryrd}
 \usepackage{bm}
 \usepackage{amsthm}
 \usepackage{indentfirst}
@@ -7,7 +8,8 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{geometry}
-\usepackage{xcolor}
+\usepackage{xcolor,colortbl}
+\usepackage{tcolorbox}
 \usepackage{mathrsfs}
 \usepackage{bclogo}
 \usepackage{mathtools}
@@ -20,27 +22,31 @@
 \usepackage[cal=esstix]{mathalpha}
 \usepackage[pdfpagelabels]{hyperref}    
 \usepackage[backend=biber,style=numeric,sorting=ynt]{biblatex}
+\usepackage{titlesec}
 
 \geometry{letterpaper,scale=0.8}
-\setstretch{1.2}
-%\addbibresource{/Users/zhengz/Desktop/Math/Workspace/Readings/Readings/Readings.bib}
-\addbibresource{/Users/zhengz/Desktop/Math/Workspace/Readings/Readings/Readings.bib}
+\setstretch{1.1}
 
+% ---------- Header ----------
 \pagestyle{fancy}
-\newlength{\pageoffset}
-\setlength{\pageoffset}{2cm}% use whatever you like
-\fancyheadoffset[LE,RO]{\pageoffset}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhf{}
-\fancyhead[LE]{\makebox[\pageoffset][l]{\bfseries\thepage}\bfseries\leftmark}
-\fancyhead[RO]{\bfseries\rightmark\makebox[\pageoffset][r]{\bfseries\thepage}}
-\fancypagestyle{plain}{
-    \fancyhead{} % get rid of headers
-    \renewcommand{\headrulewidth}{0pt} % and the line
-                       }
-\setlength{\headheight}{15pt}
+\fancyhead[L]{Math Notes}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
 
+% ---------- Hyperref Setup ----------
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=cyan
+}
+% ---------- Section Styling ----------
+\titleformat{\section}
+  {\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\newtcolorbox[auto counter, number within=section]{Topics}[2][]{%
+colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title=~\thetcbcounter:#2,#1}
 
 \makeatletter
 \newcommand*{\@old@slash}{}\let\@old@slash\slash
@@ -81,8 +87,8 @@
 \newcommand{\codim}{\mathrm{codim}\,}
 \newcommand{\ann}{\mathrm{ann}\,}
 \newcommand{\ext}{\mathrm{Ext}}
-\newcommand{\Ad}{\mathrm{Ad}\,}
+\newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\ad}{\mathrm{ad}}
 \newcommand{\Aut}{\mathrm{Aut}}
 \newcommand{\Mod}{\mathrm{Mod}}
-\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\spec}{\mathrm{Spec}\,}

@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+
+\usepackage{/Users/zhengz/Desktop/Math/Workspace/Readings/Readings/Misc}
+
+\title{Collections of various things}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Algebraic Geometry}
+
+\subsection{2026-05-07}
+
+\begin{Topics}{scheme is not affine}
+Prove that the open scheme obtained from \(\spec k[x,y,z,w]/(xw-yz)\) removing codimension 1 subscheme \(V(x,y)\) is not affine. 
+\end{Topics}
+
+Let \(X=\spec A=\spec k[x,y,z,w]/(xw-yz)\) and \(U=X-V(x,y)\). We want to show that \(U\) is not affine. Note that \(A\) can be viewed as \(2\times 2\) matrix with determinant 0. Consider 
+\[\tilde{X}=\left\{ (x,y,z,w),(s:t)\mid \begin{pmatrix} 
+  x&z\\
+  y&w
+\end{pmatrix}\begin{pmatrix}
+  s\\
+  t
+\end{pmatrix}=\begin{pmatrix}
+  0\\
+  0
+\end{pmatrix}
+\right\}\subset \mathbb{A}^4\times \mathbb{P}^1.\]
+We have the projection to the first factor \(\tilde{X}\rightarrow X\). Note that 
+\[\begin{pmatrix}
+  x&z\\
+  y&w
+\end{pmatrix}\begin{pmatrix}
+  1\\
+  0
+\end{pmatrix}=\begin{pmatrix}
+  0\\
+  0
+\end{pmatrix}\]
+is equivalent to \(x=y=0\). We define a map \(\tilde{X}\dashrightarrow  \mathbb{A}^1\) projecting onto \(\left\{ t\neq 0 \right\}\), away from the point \((1:0)\in \mathbb{P}^1\), namely 
+\begin{align*}
+     \tilde{X}&\dashrightarrow \mathbb{A}^1,\\
+     (x,y,z,w),(s:t)&\mapsto \frac{s}{t}=-\frac{z}{x}=-\frac{w}{y}.
+\end{align*}
+This map factor through \(U=X-V(x,y)\)
+\[\frac{z}{x}=\frac{w}{y}:X-V(x,y)=U\rightarrow \mathbb{A}^1\]
+and we obtain an isomorphism given by 
+\begin{align*}
+     X-V(x,y)&\rightarrow (\mathbb{A}^2-0)\times \mathbb{A}^1,\\
+     (x,y,z,w)&\mapsto (x,y,\frac{z}{x}=\frac{w}{y}),\\
+     (x,y,xu,yu)&\mapsfrom (x,y,u)
+\end{align*}
+Alternatively, we could compute \(\mathcal{O}_X(U)\) via the covering \(D(x)\cup D(y)\). 
+\begin{align*}
+     \mathcal{O}_X(D(x))&=k[x,x^{-1},y,z,w]/(xw-yz)=k[x,x^{-1},y,z],\ w=x^{-1}yz,\\
+     \mathcal{O}_X(D(y))&=k[x,y^{-1},y,z,w]/(xw-yz)=k[x,y^{-1},y,w],\ z=y^{-1}xw.\\
+     \mathcal{O}_X(D(xy))&=k[x,y,x^{-1},y^{-1},z],\  w=x^{-1}yz.
+\end{align*}
+And we know that 
+\[\mathcal{O}_X(U)=\ker (\mathcal{O}_X(D(x))\oplus \mathcal{O}_X(D(y))\rightarrow \mathcal{O}_X(D(xy)))\]
+where the map is given by \((f,g)\mapsto f|_{D(xy)}-g|_{D(xy)}\) for \(f\in \mathcal{O}_X((D(x)))\) and \(g\in \mathcal{O}_X(D(y))\). We claim that the element in the kernel \(\mathcal{O}_X(U)\) must be of the form \((a,b)\) such that \(a\in k[x,y,\frac{z}{x}]\), \(b\in k[x,y,\frac{w}{y}]\) and \(a=b\) after mapping to the localization \(\mathcal{O}_X(D(xy))\). This implies that \(\mathcal{O}_X(U)\) is isomorphic to \(k[x,y,\frac{z}{x}=\frac{w}{y}]\). If \(U\) is affine, then \(U\simeq \mathbb{A}^3\). This cannot happen. 
+
+\begin{Topics}{Cohomology and base change dimension jump up}
+  The following is an example.
+\end{Topics}
+
+\end{document}
